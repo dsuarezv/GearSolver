@@ -55,7 +55,8 @@ namespace CycloidGenerator
         public double c;
         public double n;
         public double s;
-        public string f;
+        public double CenterCamDiameter = 22;
+        public double CenterShaftDiameter = 8;
 
         private static Polar ToPolar(double x, double y)
         {
@@ -220,7 +221,7 @@ namespace CycloidGenerator
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
 
-            circle(new Point(-e, 0), d / 2, "cam");
+            circle(new Point(-e, 0), CenterCamDiameter / 2, "cam");
 
             //#generate the pin locations
             //for i in range(0, n+1):
@@ -229,8 +230,6 @@ namespace CycloidGenerator
             //    dxf.append( sdxf.Circle(center=(x,y), radius=d/2, layer="roller") )
             //#add a circle in the center of the pins
             //dxf.append( sdxf.Circle(center=(0, 0), radius=d/2, layer="roller") )
-
-
             for (int k = 0; k < n + 1; ++k)
             {
                 var x = p * n * Math.Cos(2 * Math.PI / (n + 1) * k);
@@ -238,7 +237,7 @@ namespace CycloidGenerator
                 circle(new Point(x, y), d / 2, "roller");
             }
 
-            circle(new Point(0, 0), d / 2, "roller");
+            circle(new Point(0, 0), CenterShaftDiameter / 2, "roller");
         }
     }
 

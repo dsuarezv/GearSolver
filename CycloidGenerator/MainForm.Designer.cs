@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.ExportDxfButton = new System.Windows.Forms.Button();
+            this.dependencyTrackBar10 = new CycloidGenerator.DependencyTrackBar();
+            this.dependencyTrackBar9 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar8 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar7 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar6 = new CycloidGenerator.DependencyTrackBar();
@@ -50,6 +52,36 @@
             this.ExportDxfButton.Text = "Export DXF...";
             this.ExportDxfButton.UseVisualStyleBackColor = true;
             this.ExportDxfButton.Click += new System.EventHandler(this.ExportDxfButton_Click);
+            // 
+            // dependencyTrackBar10
+            // 
+            this.dependencyTrackBar10.DependencyObject = null;
+            this.dependencyTrackBar10.DependencyPropertyName = "CenterShaftDiameter";
+            this.dependencyTrackBar10.LargeChange = 1D;
+            this.dependencyTrackBar10.Location = new System.Drawing.Point(13, 391);
+            this.dependencyTrackBar10.Maximum = 50D;
+            this.dependencyTrackBar10.Minimum = 2D;
+            this.dependencyTrackBar10.Name = "dependencyTrackBar10";
+            this.dependencyTrackBar10.Size = new System.Drawing.Size(228, 36);
+            this.dependencyTrackBar10.SmallChange = 0.1D;
+            this.dependencyTrackBar10.TabIndex = 11;
+            this.dependencyTrackBar10.Value = 2D;
+            this.dependencyTrackBar10.TargetChanged += new System.EventHandler(this.CycloidTrackBar_TargetChanged);
+            // 
+            // dependencyTrackBar9
+            // 
+            this.dependencyTrackBar9.DependencyObject = null;
+            this.dependencyTrackBar9.DependencyPropertyName = "CenterCamDiameter";
+            this.dependencyTrackBar9.LargeChange = 1D;
+            this.dependencyTrackBar9.Location = new System.Drawing.Point(12, 349);
+            this.dependencyTrackBar9.Maximum = 80D;
+            this.dependencyTrackBar9.Minimum = 4D;
+            this.dependencyTrackBar9.Name = "dependencyTrackBar9";
+            this.dependencyTrackBar9.Size = new System.Drawing.Size(228, 36);
+            this.dependencyTrackBar9.SmallChange = 0.1D;
+            this.dependencyTrackBar9.TabIndex = 10;
+            this.dependencyTrackBar9.Value = 4D;
+            this.dependencyTrackBar9.TargetChanged += new System.EventHandler(this.CycloidTrackBar_TargetChanged);
             // 
             // dependencyTrackBar8
             // 
@@ -189,6 +221,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 545);
+            this.Controls.Add(this.dependencyTrackBar10);
+            this.Controls.Add(this.dependencyTrackBar9);
             this.Controls.Add(this.dependencyTrackBar8);
             this.Controls.Add(this.dependencyTrackBar7);
             this.Controls.Add(this.dependencyTrackBar6);
@@ -217,6 +251,8 @@
         private DependencyTrackBar dependencyTrackBar6;
         private DependencyTrackBar dependencyTrackBar7;
         private DependencyTrackBar dependencyTrackBar8;
+        private DependencyTrackBar dependencyTrackBar9;
+        private DependencyTrackBar dependencyTrackBar10;
     }
 }
 

@@ -36,6 +36,8 @@ namespace CycloidGenerator
             dependencyTrackBar6.DependencyObject = mCycloid;
             dependencyTrackBar7.DependencyObject = mCycloid;
             dependencyTrackBar8.DependencyObject = mCycloid;
+            dependencyTrackBar9.DependencyObject = mCycloid;
+            dependencyTrackBar10.DependencyObject = mCycloid;
         }
 
         private void ExportDxfButton_Click(object sender, EventArgs e)
