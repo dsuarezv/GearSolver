@@ -9,7 +9,7 @@ with some added features (mainly, the graphical display). This is some quick cod
 
 Here is a screenshot of an early version: 
 
-![Screenshot](/screenshots/02.jpg)
+![Screenshot](/Screenshots/02.jpg)
 
 
 ## Installing
