@@ -19,6 +19,8 @@ The instalation is pretty straigforward, just unzip and run the .exe.
 
 ## Building
 
-Open the solution in Visual Studio (I used 2013) and build. Alternatively, 
+Open the solution in Visual Studio (I used 2013) and build. Alternatively, use msbuild: 
+
+    msbuild CycloidGenerator.sln
 
 

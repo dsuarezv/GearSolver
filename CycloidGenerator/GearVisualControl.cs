@@ -9,19 +9,20 @@ using System.Windows.Forms;
 
 namespace CycloidGenerator
 {
-    public class CycloidControl: Control
+    public class GearVisualControl: Control, IExportClient
     {
-        private Cycloid mCycloid;
+        private ISolver mSolver;
         private bool mDrawGrid = true;
         private Matrix mDirectTransform;
         private Matrix mInverseTransform;
         private Pen[] mPens;
+        private Graphics mCurrentGraphics;
 
 
-        public Cycloid Cycloid
+        public ISolver Solver
         {
-            get { return mCycloid; }
-            set { mCycloid = value; Invalidate(); }
+            get { return mSolver; }
+            set { mSolver = value; Invalidate(); }
         }
 
         public bool DrawGrid
@@ -31,7 +32,7 @@ namespace CycloidGenerator
         }
 
 
-        public CycloidControl()
+        public GearVisualControl()
         {
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint
@@ -72,7 +73,9 @@ namespace CycloidGenerator
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (mCycloid == null) return;
+            if (mSolver == null) return;
+
+            mCurrentGraphics = e.Graphics;
             
             // Apply transformation for centering and any possible rotation correction.
             e.Graphics.Transform = mDirectTransform;
@@ -81,19 +84,12 @@ namespace CycloidGenerator
             PaintGrid(e.Graphics);
 
             // Draw the thing
-            mCycloid.CalculateCam(
-                (center, radius, layer) =>
-                {
-                    e.Graphics.DrawEllipse(GetPen(layer), new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
-                },
-                (p1, p2, layer) =>
-                {
-                    e.Graphics.DrawLine(GetPen(layer), GetPointF(p1), GetPointF(p2));
-                }
-            );
+            mSolver.Run(this);
 
             // Reset transform
             e.Graphics.Transform = new Matrix();
+
+            mCurrentGraphics = null;
         }
 
         private void PaintGrid(Graphics g)
@@ -146,6 +142,20 @@ namespace CycloidGenerator
             var points = new PointF[] { p };
             m.TransformPoints(points);
             return points[0];
+        }
+
+        public void Circle(Point center, double radius, string layer)
+        {
+            if (mCurrentGraphics == null) return;
+
+            mCurrentGraphics.DrawEllipse(GetPen(layer), new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
+        }
+
+        public void Line(Point p1, Point p2, string layer)
+        {
+            if (mCurrentGraphics == null) return;
+
+            mCurrentGraphics.DrawLine(GetPen(layer), GetPointF(p1), GetPointF(p2));
         }
     }
 }

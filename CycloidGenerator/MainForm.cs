@@ -12,7 +12,7 @@ namespace CycloidGenerator
 {
     public partial class MainForm : Form
     {
-        private Cycloid mCycloid = new Cycloid()
+        private CycloidSolver mCycloid = new CycloidSolver()
             {
                 p = 6,
                 d = 15,
@@ -27,7 +27,7 @@ namespace CycloidGenerator
         {
             InitializeComponent();
 
-            cycloidControl1.Cycloid = mCycloid;
+            cycloidControl1.Solver = mCycloid;
             dependencyTrackBar1.DependencyObject = mCycloid;
             dependencyTrackBar2.DependencyObject = mCycloid;
             dependencyTrackBar3.DependencyObject = mCycloid;

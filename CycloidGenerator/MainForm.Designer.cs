@@ -39,7 +39,7 @@
             this.dependencyTrackBar3 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar2 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar1 = new CycloidGenerator.DependencyTrackBar();
-            this.cycloidControl1 = new CycloidGenerator.CycloidControl();
+            this.cycloidControl1 = new CycloidGenerator.GearVisualControl();
             this.SuspendLayout();
             // 
             // ExportDxfButton
@@ -208,7 +208,7 @@
             this.cycloidControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cycloidControl1.Cycloid = null;
+            this.cycloidControl1.Solver = null;
             this.cycloidControl1.DrawGrid = true;
             this.cycloidControl1.Location = new System.Drawing.Point(264, 13);
             this.cycloidControl1.Name = "cycloidControl1";
@@ -241,7 +241,7 @@
 
         #endregion
 
-        private CycloidControl cycloidControl1;
+        private GearVisualControl cycloidControl1;
         private System.Windows.Forms.Button ExportDxfButton;
         private DependencyTrackBar dependencyTrackBar1;
         private DependencyTrackBar dependencyTrackBar2;

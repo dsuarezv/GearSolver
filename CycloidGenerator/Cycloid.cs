@@ -45,7 +45,7 @@ namespace CycloidGenerator
         }
     }
 
-    public class Cycloid
+    public class CycloidSolver: ISolver
     {
         public double p;
         public double b = 0;
@@ -146,10 +146,14 @@ namespace CycloidGenerator
             return result;
         }
 
-
-        public void CalculateCam(CircleDelegate circle, LineDelegate line)
+        public IList<SolverParameter> GetParams()
         {
-            if (line == null || circle == null) throw new Exception("null drawing delegates");
+            throw new NotImplementedException();
+        }
+
+        public void Run(IExportClient cl)
+        {
+            if (cl == null) throw new Exception("null export client");
 
             //if b > 0:
             //    p = b/n
@@ -185,8 +189,8 @@ namespace CycloidGenerator
             var minRadius = CalcPressureLimit(p, d, e, n, minAngle * Math.PI / 180d);
             var maxRadius = CalcPressureLimit(p, d, e, n, maxAngle * Math.PI / 180d);
 
-            circle(new Point(-e, 0), minRadius, "pressure");
-            circle(new Point(-e, 0), maxRadius, "pressure");
+            cl.Circle(new Point(-e, 0), minRadius, "pressure");
+            cl.Circle(new Point(-e, 0), maxRadius, "pressure");
 
 
             //#generate the cam profile - note: shifted in -x by eccentricicy amount
@@ -213,7 +217,7 @@ namespace CycloidGenerator
                 var y2 = CalcY(p, d, e, n, q * (j + 1));
                 var xy2 = CheckLimit(x2, y2, maxRadius, minRadius, c);
 
-                line(new Point(xy1.X - e, xy1.Y), new Point(xy2.X - e, xy2.Y), "cam");
+                cl.Line(new Point(xy1.X - e, xy1.Y), new Point(xy2.X - e, xy2.Y), "cam");
                 xy1 = xy2;
             }
 
@@ -221,7 +225,7 @@ namespace CycloidGenerator
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
 
-            circle(new Point(-e, 0), CenterCamDiameter / 2, "cam");
+            cl.Circle(new Point(-e, 0), CenterCamDiameter / 2, "cam");
 
             //#generate the pin locations
             //for i in range(0, n+1):
@@ -234,73 +238,10 @@ namespace CycloidGenerator
             {
                 var x = p * n * Math.Cos(2 * Math.PI / (n + 1) * k);
                 var y = p * n * Math.Sin(2 * Math.PI / (n + 1) * k);
-                circle(new Point(x, y), d / 2, "roller");
+                cl.Circle(new Point(x, y), d / 2, "roller");
             }
 
-            circle(new Point(0, 0), CenterShaftDiameter / 2, "roller");
+            cl.Circle(new Point(0, 0), CenterShaftDiameter / 2, "roller");
         }
     }
-
-    public delegate void CircleDelegate(Point center, double radius, string layer);
-    public delegate void LineDelegate(Point p1, Point p2, string layer);
 }
-    /*
-     #!/usr/bin/python
-
-#if -o was specifed, calculate the tooth pitch for use in cam generation
-if b > 0:
-	p = b/n
-
-q=2*math.pi/float(s)
-
-
-     
-# Find the pressure angle limit circles
-minAngle = -1.0
-maxAngle = -1.0
-for i in range(0, 180):
-        x = calcPressureAngle(p,d,n,float(i)*math.pi/180)
-        if (x < ang) and (minAngle < 0):
-                minAngle = float(i)
-        if (x < -ang) and (maxAngle < 0):
-                maxAngle = float(i-1)
-minRadius = calcPressureLimit(p,d,e,n,minAngle*math.pi/180)
-maxRadius = calcPressureLimit(p,d,e,n,maxAngle*math.pi/180)
-dxf.append( sdxf.Circle(center=(-e, 0), radius=minRadius, layer="pressure") )
-dxf.append( sdxf.Circle(center=(-e, 0), radius=maxRadius, layer="pressure") )
-
-#generate the cam profile - note: shifted in -x by eccentricicy amount
-i=0
-x1 = calcX(p,d,e,n,q*i)
-y1 = calcY(p,d,e,n,q*i)
-x1, y1 = checkLimit(x1,y1,maxRadius, minRadius, c)
-for i in range(0, s):
-        x2 = calcX(p,d,e,n,q*(i+1))
-        y2 = calcY(p,d,e,n,q*(i+1))
-        x2, y2 = checkLimit(x2,y2,maxRadius, minRadius, c)
-	dxf.append( sdxf.Line(points=[(x1-e,y1),  (x2-e,y2)], layer="cam" ) )
-        x1 = x2
-        y1 = y2
-
-#add a circle in the center of the cam
-dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
-
-#generate the pin locations
-for i in range(0, n+1):
-	x = p*n*math.cos(2*math.pi/(n+1)*i)
-	y = p*n*math.sin(2*math.pi/(n+1)*i)
-	dxf.append( sdxf.Circle(center=(x,y), radius=d/2, layer="roller") )
-#add a circle in the center of the pins
-dxf.append( sdxf.Circle(center=(0, 0), radius=d/2, layer="roller") )
-
-
-try:
-	dxf.saveas(f)
-except:
-	print("Problem saving file")
-	sys.exit(2)
-
-
-
-     */
-
