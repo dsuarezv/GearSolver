@@ -14,5 +14,15 @@ namespace CycloidGenerator
         public double MaxValue;
         public double MinValue;
         public double DefaultValue;
+
+
+        public SolverParameter(string depPropName, string caption, double maxv, double minv, double defv)
+        {
+            DependencyPropertyName = depPropName;
+            Caption = caption;
+            MaxValue = maxv;
+            MinValue = minv;
+            DefaultValue = defv;
+        }
     }
 }

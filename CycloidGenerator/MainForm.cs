@@ -12,42 +12,75 @@ namespace CycloidGenerator
 {
     public partial class MainForm : Form
     {
-        private CycloidSolver mCycloid = new CycloidSolver()
-            {
-                p = 6,
-                d = 15,
-                e = 4,
-                ang = 50.0,
-                c = 0,
-                n = 10, 
-                s = 1000
-            };
+        private ISolver mSolver;
 
         public MainForm()
         {
             InitializeComponent();
 
-            cycloidControl1.Solver = mCycloid;
-            dependencyTrackBar1.DependencyObject = mCycloid;
-            dependencyTrackBar2.DependencyObject = mCycloid;
-            dependencyTrackBar3.DependencyObject = mCycloid;
-            dependencyTrackBar4.DependencyObject = mCycloid;
-            dependencyTrackBar5.DependencyObject = mCycloid;
-            dependencyTrackBar6.DependencyObject = mCycloid;
-            dependencyTrackBar7.DependencyObject = mCycloid;
-            dependencyTrackBar8.DependencyObject = mCycloid;
-            dependencyTrackBar9.DependencyObject = mCycloid;
-            dependencyTrackBar10.DependencyObject = mCycloid;
+            SetSolver(
+                new CycloidSolver()
+                {
+                    p = 6,
+                    d = 15,
+                    e = 4,
+                    ang = 50.0,
+                    c = 0,
+                    n = 10,
+                    s = 1000
+                }
+            );
+        }
+
+        private void SetSolver(ISolver solver)
+        {
+            mSolver = solver;
+            
+            var pars = solver.GetParams();
+            if (pars != null) CreateParamsControls(pars);
+
+            SolverNameLabel.Text = mSolver.GetName();
+            gearVisualizer1.Solver = solver;
+        }
+
+        private void CreateParamsControls(IList<SolverParameter> pars)
+        {
+            ParamsPanel.SuspendLayout();
+            ParamsPanel.Controls.Clear();
+
+            int currentY = 0;
+
+            foreach (var p in pars)
+            {
+                CreateTrackBarForParam(p, ref currentY);
+            }
+
+            ParamsPanel.ResumeLayout();
+        }
+
+        private void CreateTrackBarForParam(SolverParameter p, ref int y)
+        {
+            var dp = new DependencyTrackBar();
+
+            dp.DependencyPropertyName = p.DependencyPropertyName;
+            dp.Width = ParamsPanel.Width;
+            dp.Top = y;
+            dp.Maximum = p.MaxValue; 
+            dp.Minimum = p.MinValue;
+            dp.Value = p.DefaultValue;
+            dp.Caption = p.Caption;
+            dp.Hint = p.Hint;
+            dp.TargetChanged += (s, e) => { gearVisualizer1.Invalidate(); };
+            dp.DependencyObject = mSolver;
+
+            y += dp.Height;
+
+            ParamsPanel.Controls.Add(dp);
         }
 
         private void ExportDxfButton_Click(object sender, EventArgs e)
         {
-            DxfExporter.ExportCycloid(mCycloid, "test.dxf");
-        }
-
-        private void CycloidTrackBar_TargetChanged(object sender, EventArgs e)
-        {
-            cycloidControl1.Invalidate();
+            DxfExporter.ExportCycloid(mSolver, "test.dxf");
         }
     }
 }

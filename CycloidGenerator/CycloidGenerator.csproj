@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cycloid.cs" />
+    <Compile Include="Solvers\CycloidSolver.cs" />
     <Compile Include="GearVisualControl.cs">
       <SubType>Component</SubType>
     </Compile>

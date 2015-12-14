@@ -8,7 +8,10 @@ namespace CycloidGenerator
 {
     public interface ISolver
     {
+        string GetName();
+        string GetDescription();
         IList<SolverParameter> GetParams();
         void Run(IExportClient client);
+        
     }
 }

@@ -146,10 +146,7 @@ namespace CycloidGenerator
             return result;
         }
 
-        public IList<SolverParameter> GetParams()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Run(IExportClient cl)
         {
@@ -242,6 +239,63 @@ namespace CycloidGenerator
             }
 
             cl.Circle(new Point(0, 0), CenterShaftDiameter / 2, "roller");
+        }
+
+        public IList<SolverParameter> GetParams()
+        {
+            return new SolverParameter[]
+            {
+                new SolverParameter("p", "Tooth pitch", 20, 0, 6),
+                new SolverParameter("b", "Pin bolt circle diameter (overrides Tooth pitch)", 200, 0, 0),
+                new SolverParameter("d", "Roller diameter", 20, 0, 15),
+                new SolverParameter("e", "Eccentricity", 50, 0, 4),
+                new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
+                new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
+                new SolverParameter("n", "Number of teeth in cam", 20, 0, 9),
+                new SolverParameter("s", "Line segments in DXF", 3000, 1, 1000),
+                new SolverParameter("CenterCamDiameter", "Diameter of cam hole", 60, 4, 22),
+                new SolverParameter("CenterShaftDiameter", "Diameter of driving shaft", 50, 2, 8),
+            };
+        }
+
+        public string GetName()
+        {
+            return "Cycloidal Gear";
+        }
+
+        public string GetDescription()
+        {
+            return @"
+2015 David Suárez. This is port of the python script by Alex Lait (see url below).
+
+Original readme and notice: 
+---------------------------
+
+Copyright 	2009, Alex Lait
+Version 	v0.2 (09/13/09)
+License 	GPL
+Homepage 	http://www.zincland.com/hypocycloid
+
+Credit to:
+	Formulas to describe a hypocycloid cam
+	http://gears.ru/transmis/zaprogramata/2.139.pdf
+
+	Insperational thread on CNCzone
+	http://www.cnczone.com/forums/showthread.php?t=72261
+
+	Documenting and updating the sdxf library
+	http://www.kellbot.com/sdxf-python-library-for-dxf/
+
+	Formulas for calculating the pressure angle and finding the limit circles
+	http://imtuoradea.ro/auo.fmte/files-2007/MECATRONICA_files/Anamaria_Dascalescu_1.pdf
+
+Notes:
+	Does not currently do ANY checking for sane input values and it
+	is possible to create un-machinable cams, use at your own risk
+Suggestions:
+	- Eccentricity should not be more than the roller radius
+	- Has not been tested with negative values, may have interesting results :)
+            ";
         }
     }
 }

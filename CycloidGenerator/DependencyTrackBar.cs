@@ -14,10 +14,23 @@ namespace CycloidGenerator
     {
         private object mDepObject;
         private string mDepPropertyName;
+        private string mCaption;
+        private string mHint; 
 
 
         public event EventHandler TargetChanged;
 
+        public string Caption
+        {
+            get { return mCaption; }
+            set { mCaption = value; CaptionLabel.Text = value; }
+        }
+
+        public string Hint
+        {
+            get { return mHint; }
+            set { mHint = value; Invalidate(); }
+        }
 
         public object DependencyObject 
         {
