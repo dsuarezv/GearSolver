@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CycloidGenerator
+{
+    public partial class DependencyTrackBar : UserControl
+    {
+        private object mDepObject;
+        private string mDepPropertyName;
+
+
+        public event EventHandler TargetChanged;
+
+
+        public object DependencyObject 
+        {
+            get { return mDepObject; }
+            set { mDepObject = value; ReadFromObject(); }
+        }
+        
+        public string DependencyPropertyName 
+        {
+            get { return mDepPropertyName; }
+            set { mDepPropertyName = value; CaptionLabel.Text = value; ReadFromObject(); }
+        }
+        
+        public double Minimum 
+        {
+            get { return trackBar1.Minimum / 100d; }
+            set { trackBar1.Minimum = (int)(value * 100); }
+        }
+        
+        public double Maximum 
+        {
+            get { return trackBar1.Maximum / 100d; }
+            set { trackBar1.Maximum = (int)(value * 100); } 
+        }
+
+        public double Value
+        {
+            get { return trackBar1.Value / 100d; }
+            set { trackBar1.Value = (int)(value * 100); }
+        }
+
+        public double LargeChange
+        {
+            get { return trackBar1.LargeChange / 100d; }
+            set { trackBar1.LargeChange = (int)(value * 100); }
+        }
+
+        public double SmallChange
+        {
+            get { return trackBar1.SmallChange / 100d; }
+            set { trackBar1.SmallChange = (int)(value * 100); }
+        }
+
+        public DependencyTrackBar()
+        {
+            InitializeComponent();
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            WriteToObject();
+        }
+
+        private void ReadFromObject()
+        {
+            if (DependencyObject == null || DependencyPropertyName == null) return;
+
+            var field = DependencyObject.GetType().GetField(DependencyPropertyName);
+            var val = field.GetValue(DependencyObject);
+
+            if (val is double) Value = (double)val;
+
+            ValueLabel.Text = Value.ToString();
+        }
+
+        private void WriteToObject()
+        {
+            if (DependencyObject == null || DependencyPropertyName == null) return;
+
+            var field = DependencyObject.GetType().GetField(DependencyPropertyName);
+            field.SetValue(DependencyObject, Value);
+
+            if (TargetChanged != null) TargetChanged(this, EventArgs.Empty);
+
+            ValueLabel.Text = Value.ToString();
+        }
+    }
+}

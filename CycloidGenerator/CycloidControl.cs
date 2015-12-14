@@ -57,11 +57,11 @@ namespace CycloidGenerator
             mCycloid.CalculateCam(
                 (center, radius, layer) =>
                 {
-                    e.Graphics.DrawEllipse(Pens.Black, new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
+                    e.Graphics.DrawEllipse(GetPen(layer), new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
                 },
                 (p1, p2, layer) =>
                 {
-                    e.Graphics.DrawLine(Pens.Red, GetPointF(p1), GetPointF(p2));
+                    e.Graphics.DrawLine(GetPen(layer), GetPointF(p1), GetPointF(p2));
                 }
             );
 
@@ -69,7 +69,16 @@ namespace CycloidGenerator
             e.Graphics.Transform = new Matrix();
         }
 
-
+        private Pen GetPen(string layerName)
+        {
+            switch (layerName)
+            {
+                case "cam": return Pens.Red;
+                case "roller": return Pens.Gray;
+                case "pressure": return Pens.LightGray;
+                default: return Pens.Black;
+            }
+        }
 
 
         // __ Util ____________________________________________________________

@@ -12,16 +12,7 @@ namespace CycloidGenerator
 {
     public partial class MainForm : Form
     {
-        private Cycloid mCycloid;
-
-        public MainForm()
-        {
-            InitializeComponent();
-        }
-
-        private void SampleButton_Click(object sender, EventArgs e)
-        {
-            mCycloid = new Cycloid()
+        private Cycloid mCycloid = new Cycloid()
             {
                 p = 8,
                 d = 15,
@@ -32,18 +23,29 @@ namespace CycloidGenerator
                 s = 400
             };
 
-            //mCycloid = new Cycloid()
-            //{
-            //    p = 0.08,
-            //    d = 0.15,
-            //    e = 0.05,
-            //    ang = 50.0,
-            //    c = 0.01,
-            //    n = 10,
-            //    s = 400
-            //};
+        public MainForm()
+        {
+            InitializeComponent();
 
             cycloidControl1.Cycloid = mCycloid;
+            dependencyTrackBar1.DependencyObject = mCycloid;
+            dependencyTrackBar2.DependencyObject = mCycloid;
+            dependencyTrackBar3.DependencyObject = mCycloid;
+            dependencyTrackBar4.DependencyObject = mCycloid;
+            dependencyTrackBar5.DependencyObject = mCycloid;
+            dependencyTrackBar6.DependencyObject = mCycloid;
+            dependencyTrackBar7.DependencyObject = mCycloid;
+            dependencyTrackBar8.DependencyObject = mCycloid;
+        }
+
+        private void SampleButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void CycloidTrackBar_TargetChanged(object sender, EventArgs e)
+        {
+            cycloidControl1.Invalidate();
         }
     }
 }
