@@ -18,9 +18,9 @@ namespace CycloidGenerator
                 d = 15,
                 e = 5,
                 ang = 50.0,
-                c = 1,
+                c = 0,
                 n = 10, 
-                s = 400
+                s = 1000
             };
 
         public MainForm()

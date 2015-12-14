@@ -34,31 +34,31 @@ namespace CycloidGenerator
         public double Minimum 
         {
             get { return trackBar1.Minimum / 100d; }
-            set { trackBar1.Minimum = (int)(value * 100); }
+            set { trackBar1.Minimum = (int)(value * 100d); }
         }
         
         public double Maximum 
         {
             get { return trackBar1.Maximum / 100d; }
-            set { trackBar1.Maximum = (int)(value * 100); } 
+            set { trackBar1.Maximum = (int)(value * 100d); } 
         }
 
         public double Value
         {
             get { return trackBar1.Value / 100d; }
-            set { trackBar1.Value = (int)(value * 100); }
+            set { trackBar1.Value = (int)(value * 100d); }
         }
 
         public double LargeChange
         {
             get { return trackBar1.LargeChange / 100d; }
-            set { trackBar1.LargeChange = (int)(value * 100); }
+            set { trackBar1.LargeChange = (int)(value * 100d); }
         }
 
         public double SmallChange
         {
             get { return trackBar1.SmallChange / 100d; }
-            set { trackBar1.SmallChange = (int)(value * 100); }
+            set { trackBar1.SmallChange = (int)(value * 100d); }
         }
 
         public DependencyTrackBar()

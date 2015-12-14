@@ -56,7 +56,7 @@
             this.dependencyTrackBar8.DependencyPropertyName = "s";
             this.dependencyTrackBar8.LargeChange = 1D;
             this.dependencyTrackBar8.Location = new System.Drawing.Point(12, 307);
-            this.dependencyTrackBar8.Maximum = 1000D;
+            this.dependencyTrackBar8.Maximum = 3000D;
             this.dependencyTrackBar8.Minimum = 0D;
             this.dependencyTrackBar8.Name = "dependencyTrackBar8";
             this.dependencyTrackBar8.Size = new System.Drawing.Size(228, 36);
@@ -71,11 +71,11 @@
             this.dependencyTrackBar7.DependencyPropertyName = "n";
             this.dependencyTrackBar7.LargeChange = 5D;
             this.dependencyTrackBar7.Location = new System.Drawing.Point(13, 265);
-            this.dependencyTrackBar7.Maximum = 30D;
+            this.dependencyTrackBar7.Maximum = 100D;
             this.dependencyTrackBar7.Minimum = 0D;
             this.dependencyTrackBar7.Name = "dependencyTrackBar7";
             this.dependencyTrackBar7.Size = new System.Drawing.Size(228, 36);
-            this.dependencyTrackBar7.SmallChange = 1D;
+            this.dependencyTrackBar7.SmallChange = 10D;
             this.dependencyTrackBar7.TabIndex = 8;
             this.dependencyTrackBar7.Value = 0D;
             this.dependencyTrackBar7.TargetChanged += new System.EventHandler(this.CycloidTrackBar_TargetChanged);
@@ -116,7 +116,7 @@
             this.dependencyTrackBar4.DependencyPropertyName = "e";
             this.dependencyTrackBar4.LargeChange = 1D;
             this.dependencyTrackBar4.Location = new System.Drawing.Point(13, 139);
-            this.dependencyTrackBar4.Maximum = 30D;
+            this.dependencyTrackBar4.Maximum = 10D;
             this.dependencyTrackBar4.Minimum = 0D;
             this.dependencyTrackBar4.Name = "dependencyTrackBar4";
             this.dependencyTrackBar4.Size = new System.Drawing.Size(228, 36);
@@ -144,11 +144,10 @@
             // 
             this.dependencyTrackBar2.DependencyObject = null;
             this.dependencyTrackBar2.DependencyPropertyName = "b";
-            this.dependencyTrackBar2.Enabled = false;
             this.dependencyTrackBar2.LargeChange = 1D;
             this.dependencyTrackBar2.Location = new System.Drawing.Point(13, 55);
-            this.dependencyTrackBar2.Maximum = 30D;
-            this.dependencyTrackBar2.Minimum = -30D;
+            this.dependencyTrackBar2.Maximum = 100D;
+            this.dependencyTrackBar2.Minimum = -100D;
             this.dependencyTrackBar2.Name = "dependencyTrackBar2";
             this.dependencyTrackBar2.Size = new System.Drawing.Size(228, 36);
             this.dependencyTrackBar2.SmallChange = 0.1D;
@@ -177,6 +176,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cycloidControl1.Cycloid = null;
+            this.cycloidControl1.DrawGrid = true;
             this.cycloidControl1.Location = new System.Drawing.Point(264, 13);
             this.cycloidControl1.Name = "cycloidControl1";
             this.cycloidControl1.Size = new System.Drawing.Size(551, 520);
@@ -199,7 +199,7 @@
             this.Controls.Add(this.SampleButton);
             this.Controls.Add(this.cycloidControl1);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Cycloidal gear calculator";
             this.ResumeLayout(false);
 
         }
