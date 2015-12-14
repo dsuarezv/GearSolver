@@ -38,7 +38,7 @@ namespace CycloidGenerator
 
             mDirectTransform = new Matrix();
             mDirectTransform.Translate(Width / 2, Height / 2);
-            mDirectTransform.Scale(100, -100);
+            mDirectTransform.Scale(3, -3);
             //mDirectTransform.Rotate(AngleCorrection);
 
             mInverseTransform = mDirectTransform.Clone();
@@ -51,6 +51,7 @@ namespace CycloidGenerator
             
             // Apply transformation for centering and any possible rotation correction.
             e.Graphics.Transform = mDirectTransform;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Draw the thing
             mCycloid.CalculateCam(
@@ -60,7 +61,7 @@ namespace CycloidGenerator
                 },
                 (p1, p2, layer) =>
                 {
-                    e.Graphics.DrawLine(Pens.DarkGray, GetPointF(p1), GetPointF(p2));
+                    e.Graphics.DrawLine(Pens.Red, GetPointF(p1), GetPointF(p2));
                 }
             );
 

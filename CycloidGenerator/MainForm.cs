@@ -23,14 +23,25 @@ namespace CycloidGenerator
         {
             mCycloid = new Cycloid()
             {
-                p = 0.08,
-                d = 0.15,
-                e = 0.05,
+                p = 8,
+                d = 15,
+                e = 5,
                 ang = 50.0,
-                c = 0.01,
+                c = 1,
                 n = 10, 
                 s = 400
             };
+
+            //mCycloid = new Cycloid()
+            //{
+            //    p = 0.08,
+            //    d = 0.15,
+            //    e = 0.05,
+            //    ang = 50.0,
+            //    c = 0.01,
+            //    n = 10,
+            //    s = 400
+            //};
 
             cycloidControl1.Cycloid = mCycloid;
         }
