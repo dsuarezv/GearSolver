@@ -48,7 +48,7 @@ namespace CycloidGenerator
     public class Cycloid
     {
         public double p;
-        public double b = -1;
+        public double b = 0;
         public double d;
         public double e;
         public double ang = 50;

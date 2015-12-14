@@ -146,8 +146,8 @@
             this.dependencyTrackBar2.DependencyPropertyName = "b";
             this.dependencyTrackBar2.LargeChange = 1D;
             this.dependencyTrackBar2.Location = new System.Drawing.Point(13, 55);
-            this.dependencyTrackBar2.Maximum = 100D;
-            this.dependencyTrackBar2.Minimum = -100D;
+            this.dependencyTrackBar2.Maximum = 200D;
+            this.dependencyTrackBar2.Minimum = 0D;
             this.dependencyTrackBar2.Name = "dependencyTrackBar2";
             this.dependencyTrackBar2.Size = new System.Drawing.Size(228, 36);
             this.dependencyTrackBar2.SmallChange = 0.1D;

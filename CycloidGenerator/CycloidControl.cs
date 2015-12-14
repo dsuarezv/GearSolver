@@ -55,7 +55,7 @@ namespace CycloidGenerator
 
         protected override void OnResize(EventArgs e)
         {
-            var scale = 3.694f;
+            var scale = 3.645320197044335f;
 
             base.OnResize(e);
 

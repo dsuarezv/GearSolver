@@ -14,9 +14,9 @@ namespace CycloidGenerator
     {
         private Cycloid mCycloid = new Cycloid()
             {
-                p = 8,
+                p = 6,
                 d = 15,
-                e = 5,
+                e = 4,
                 ang = 50.0,
                 c = 0,
                 n = 10, 
