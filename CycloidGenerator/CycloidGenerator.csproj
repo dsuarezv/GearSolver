@@ -57,6 +57,7 @@
     <Compile Include="DependencyTrackBar.Designer.cs">
       <DependentUpon>DependencyTrackBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="DxfExporter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

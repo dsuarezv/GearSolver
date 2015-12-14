@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SampleButton = new System.Windows.Forms.Button();
+            this.ExportDxfButton = new System.Windows.Forms.Button();
             this.dependencyTrackBar8 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar7 = new CycloidGenerator.DependencyTrackBar();
             this.dependencyTrackBar6 = new CycloidGenerator.DependencyTrackBar();
@@ -40,15 +40,16 @@
             this.cycloidControl1 = new CycloidGenerator.CycloidControl();
             this.SuspendLayout();
             // 
-            // SampleButton
+            // ExportDxfButton
             // 
-            this.SampleButton.Location = new System.Drawing.Point(13, 359);
-            this.SampleButton.Name = "SampleButton";
-            this.SampleButton.Size = new System.Drawing.Size(75, 23);
-            this.SampleButton.TabIndex = 1;
-            this.SampleButton.Text = "DrawSample";
-            this.SampleButton.UseVisualStyleBackColor = true;
-            this.SampleButton.Click += new System.EventHandler(this.SampleButton_Click);
+            this.ExportDxfButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ExportDxfButton.Location = new System.Drawing.Point(3, 510);
+            this.ExportDxfButton.Name = "ExportDxfButton";
+            this.ExportDxfButton.Size = new System.Drawing.Size(223, 23);
+            this.ExportDxfButton.TabIndex = 1;
+            this.ExportDxfButton.Text = "Export DXF...";
+            this.ExportDxfButton.UseVisualStyleBackColor = true;
+            this.ExportDxfButton.Click += new System.EventHandler(this.ExportDxfButton_Click);
             // 
             // dependencyTrackBar8
             // 
@@ -196,7 +197,7 @@
             this.Controls.Add(this.dependencyTrackBar3);
             this.Controls.Add(this.dependencyTrackBar2);
             this.Controls.Add(this.dependencyTrackBar1);
-            this.Controls.Add(this.SampleButton);
+            this.Controls.Add(this.ExportDxfButton);
             this.Controls.Add(this.cycloidControl1);
             this.Name = "MainForm";
             this.Text = "Cycloidal gear calculator";
@@ -207,7 +208,7 @@
         #endregion
 
         private CycloidControl cycloidControl1;
-        private System.Windows.Forms.Button SampleButton;
+        private System.Windows.Forms.Button ExportDxfButton;
         private DependencyTrackBar dependencyTrackBar1;
         private DependencyTrackBar dependencyTrackBar2;
         private DependencyTrackBar dependencyTrackBar3;
