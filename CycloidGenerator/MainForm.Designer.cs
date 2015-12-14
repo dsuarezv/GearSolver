@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.ExportDxfButton = new System.Windows.Forms.Button();
-            this.gearVisualizer1 = new CycloidGenerator.GearVisualControl();
             this.ParamsPanel = new System.Windows.Forms.Panel();
             this.SolverNameLabel = new System.Windows.Forms.Label();
+            this.gearVisualizer1 = new CycloidGenerator.GearVisualControl();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // ExportDxfButton
@@ -44,6 +45,21 @@
             this.ExportDxfButton.Text = "Export DXF...";
             this.ExportDxfButton.UseVisualStyleBackColor = true;
             this.ExportDxfButton.Click += new System.EventHandler(this.ExportDxfButton_Click);
+            // 
+            // ParamsPanel
+            // 
+            this.ParamsPanel.Location = new System.Drawing.Point(3, 45);
+            this.ParamsPanel.Name = "ParamsPanel";
+            this.ParamsPanel.Size = new System.Drawing.Size(255, 459);
+            this.ParamsPanel.TabIndex = 2;
+            // 
+            // SolverNameLabel
+            // 
+            this.SolverNameLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SolverNameLabel.Location = new System.Drawing.Point(5, 8);
+            this.SolverNameLabel.Name = "SolverNameLabel";
+            this.SolverNameLabel.Size = new System.Drawing.Size(253, 28);
+            this.SolverNameLabel.TabIndex = 3;
             // 
             // gearVisualizer1
             // 
@@ -58,20 +74,11 @@
             this.gearVisualizer1.TabIndex = 0;
             this.gearVisualizer1.Text = "cycloidControl1";
             // 
-            // ParamsPanel
+            // saveFileDialog1
             // 
-            this.ParamsPanel.Location = new System.Drawing.Point(3, 45);
-            this.ParamsPanel.Name = "ParamsPanel";
-            this.ParamsPanel.Size = new System.Drawing.Size(255, 459);
-            this.ParamsPanel.TabIndex = 2;
-            // 
-            // SolverNameLabel
-            // 
-            this.SolverNameLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SolverNameLabel.Location = new System.Drawing.Point(3, 13);
-            this.SolverNameLabel.Name = "SolverNameLabel";
-            this.SolverNameLabel.Size = new System.Drawing.Size(223, 23);
-            this.SolverNameLabel.TabIndex = 3;
+            this.saveFileDialog1.DefaultExt = "dxf";
+            this.saveFileDialog1.Filter = "DXF files|*.dxf|All files|*.*";
+            this.saveFileDialog1.Title = "Export as DXF...";
             // 
             // MainForm
             // 
@@ -94,6 +101,7 @@
         private System.Windows.Forms.Button ExportDxfButton;
         private System.Windows.Forms.Panel ParamsPanel;
         private System.Windows.Forms.Label SolverNameLabel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

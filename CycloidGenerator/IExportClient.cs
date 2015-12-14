@@ -8,7 +8,7 @@ namespace CycloidGenerator
 {
     public interface IExportClient
     {
-        void Circle(Point center, double radius, string layer);
-        void Line(Point p1, Point p2, string layer);
+        void Circle(Point center, double radius, int color, string layer);
+        void Line(Point p1, Point p2, int color, string layer);
     }
 }

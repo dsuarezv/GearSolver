@@ -105,13 +105,10 @@ namespace CycloidGenerator
 
         }
 
-        private Pen GetPen(string layerName)
+        private Pen GetPen(string penName)
         {
-            switch (layerName)
+            switch (penName)
             {
-                case "cam": return mPens[0];
-                case "roller": return mPens[1];
-                case "pressure": return mPens[2];
                 case "grid": return mPens[3];
                 default: return Pens.Black;
             }
@@ -144,18 +141,18 @@ namespace CycloidGenerator
             return points[0];
         }
 
-        public void Circle(Point center, double radius, string layer)
+        public void Circle(Point center, double radius, int color, string layer)
         {
             if (mCurrentGraphics == null) return;
 
-            mCurrentGraphics.DrawEllipse(GetPen(layer), new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
+            mCurrentGraphics.DrawEllipse(mPens[color], new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
         }
 
-        public void Line(Point p1, Point p2, string layer)
+        public void Line(Point p1, Point p2, int color, string layer)
         {
             if (mCurrentGraphics == null) return;
 
-            mCurrentGraphics.DrawLine(GetPen(layer), GetPointF(p1), GetPointF(p2));
+            mCurrentGraphics.DrawLine(mPens[color], GetPointF(p1), GetPointF(p2));
         }
     }
 }

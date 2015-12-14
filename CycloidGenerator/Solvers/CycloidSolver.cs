@@ -186,8 +186,8 @@ namespace CycloidGenerator
             var minRadius = CalcPressureLimit(p, d, e, n, minAngle * Math.PI / 180d);
             var maxRadius = CalcPressureLimit(p, d, e, n, maxAngle * Math.PI / 180d);
 
-            cl.Circle(new Point(-e, 0), minRadius, "pressure");
-            cl.Circle(new Point(-e, 0), maxRadius, "pressure");
+            cl.Circle(new Point(-e, 0), minRadius, 2, "pressure");
+            cl.Circle(new Point(-e, 0), maxRadius, 2, "pressure");
 
 
             //#generate the cam profile - note: shifted in -x by eccentricicy amount
@@ -214,7 +214,7 @@ namespace CycloidGenerator
                 var y2 = CalcY(p, d, e, n, q * (j + 1));
                 var xy2 = CheckLimit(x2, y2, maxRadius, minRadius, c);
 
-                cl.Line(new Point(xy1.X - e, xy1.Y), new Point(xy2.X - e, xy2.Y), "cam");
+                cl.Line(new Point(xy1.X - e, xy1.Y), new Point(xy2.X - e, xy2.Y), 0, "cam");
                 xy1 = xy2;
             }
 
@@ -222,7 +222,7 @@ namespace CycloidGenerator
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
 
-            cl.Circle(new Point(-e, 0), CenterCamDiameter / 2, "cam");
+            cl.Circle(new Point(-e, 0), CenterCamDiameter / 2, 0, "cam");
 
             //#generate the pin locations
             //for i in range(0, n+1):
@@ -235,10 +235,10 @@ namespace CycloidGenerator
             {
                 var x = p * n * Math.Cos(2 * Math.PI / (n + 1) * k);
                 var y = p * n * Math.Sin(2 * Math.PI / (n + 1) * k);
-                cl.Circle(new Point(x, y), d / 2, "roller");
+                cl.Circle(new Point(x, y), d / 2, 1, "roller");
             }
 
-            cl.Circle(new Point(0, 0), CenterShaftDiameter / 2, "roller");
+            cl.Circle(new Point(0, 0), CenterShaftDiameter / 2, 1, "roller");
         }
 
         public IList<SolverParameter> GetParams()

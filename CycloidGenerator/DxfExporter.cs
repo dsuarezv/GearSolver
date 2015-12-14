@@ -22,7 +22,7 @@ namespace CycloidGenerator
             exporter.mDxf.Save(fileName);
         }
 
-        public void Circle(Point center, double radius, string layer)
+        public void Circle(Point center, double radius, int color, string layer)
         {
             var l = GetLayer(mDxf, layer);
             var e = new Circle(new Vector2(center.X, center.Y), radius);
@@ -30,7 +30,7 @@ namespace CycloidGenerator
             mDxf.AddEntity(e);
         }
 
-        public void Line(Point p1, Point p2, string layer)
+        public void Line(Point p1, Point p2, int color, string layer)
         {
             var l = GetLayer(mDxf, layer);
             var e = new Line(new Vector2(p1.X, p1.Y), new Vector2(p2.X, p2.Y));

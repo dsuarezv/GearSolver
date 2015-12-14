@@ -32,6 +32,10 @@ namespace CycloidGenerator
             );
         }
 
+
+        // __ Impl ____________________________________________________________
+
+
         private void SetSolver(ISolver solver)
         {
             mSolver = solver;
@@ -80,7 +84,10 @@ namespace CycloidGenerator
 
         private void ExportDxfButton_Click(object sender, EventArgs e)
         {
-            DxfExporter.ExportCycloid(mSolver, "test.dxf");
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                DxfExporter.ExportCycloid(mSolver, saveFileDialog1.FileName);
+            }
         }
     }
 }
