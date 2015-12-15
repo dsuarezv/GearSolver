@@ -10,25 +10,25 @@ namespace CycloidGenerator.Solvers
     {
         private const double Deg2Rad = Math.PI / 180d;
 
-        
-        public double Angle;
+
+        public double Angle = 35;
 
 
-        public string GetName()
+        public string Name
         {
-            return "Sample solver";
+            get { return "Sample solver"; }
         }
 
-        public string GetDescription()
+        public string Description
         {
-            return "A minimal sample to show how to crete new solvers.";
+            get { return "A minimal sample to show how to create new solvers."; }
         }
 
         public IList<SolverParameter> GetParams()
         {
             return new SolverParameter[] 
             { 
-                new SolverParameter("Angle", "Angle in degrees", 180, -180, 0)
+                new SolverParameter("Angle", "Angle in degrees", 180, -180, 35)
             };
         }
 

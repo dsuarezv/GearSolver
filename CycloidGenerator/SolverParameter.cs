@@ -16,6 +16,7 @@ namespace CycloidGenerator
         public double DefaultValue;
         public double LargeChange;
         public double SmallChange;
+        public double Value;
 
 
         public SolverParameter(string depPropName, string caption, double maxv, double minv, double defv)

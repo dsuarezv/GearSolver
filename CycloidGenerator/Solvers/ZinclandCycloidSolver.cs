@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CycloidGenerator.Solvers
 {
-    public class CycloidSolver: ISolver
+    public class ZinclandCycloidSolver: ISolver
     {
-        public double p;
+        public double p = 6;
         public double b = 0;
-        public double d;
-        public double e;
+        public double d = 15;
+        public double e = 4;
         public double ang = 50;
-        public double c;
-        public double n;
-        public double s;
+        public double c = 0;
+        public double n = 9;
+        public double s = 1000;
         public double CenterCamDiameter = 22;
         public double CenterShaftDiameter = 8;
 
@@ -106,8 +106,6 @@ namespace CycloidGenerator.Solvers
             }
             return result;
         }
-
-       
 
         public void Run(IExportClient cl)
         {
@@ -207,9 +205,9 @@ namespace CycloidGenerator.Solvers
             return new SolverParameter[]
             {
                 new SolverParameter("p", "Tooth pitch", 20, 0, 6),
-                new SolverParameter("b", "Pin bolt circle diameter (overrides Tooth pitch)", 200, 0, 0),
+                new SolverParameter("b", "Roller distance from center (overrides Tooth pitch)", 200, 0, 0),
                 new SolverParameter("d", "Roller diameter", 20, 0, 15),
-                new SolverParameter("e", "Eccentricity", 50, 0, 4),
+                new SolverParameter("e", "Cam eccentricity", 50, 0, 4),
                 new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
                 new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
                 new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 1 },
@@ -219,15 +217,16 @@ namespace CycloidGenerator.Solvers
             };
         }
 
-        public string GetName()
+        public string Name
         {
-            return "Cycloidal Gear";
+            get { return "Cycloidal Gear"; }
         }
 
-        public string GetDescription()
+        public string Description
         {
-            return @"
-2015 David Suárez. This is port of the python script by Alex Lait (see url below).
+            get
+            {
+                return @"2015 David Suárez. This is a port of the python script by Alex Lait (see url below).
 
 Original readme and notice: 
 ---------------------------
@@ -257,6 +256,7 @@ Suggestions:
 	- Eccentricity should not be more than the roller radius
 	- Has not been tested with negative values, may have interesting results :)
             ";
+            }
         }
     }
 }

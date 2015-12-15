@@ -30,8 +30,8 @@
         {
             this.ExportDxfButton = new System.Windows.Forms.Button();
             this.ParamsPanel = new System.Windows.Forms.Panel();
-            this.SolverNameLabel = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.SolverCombo = new System.Windows.Forms.ComboBox();
             this.gearVisualizer1 = new CycloidGenerator.GearVisualControl();
             this.SuspendLayout();
             // 
@@ -55,19 +55,23 @@
             this.ParamsPanel.Size = new System.Drawing.Size(255, 504);
             this.ParamsPanel.TabIndex = 2;
             // 
-            // SolverNameLabel
-            // 
-            this.SolverNameLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SolverNameLabel.Location = new System.Drawing.Point(5, 8);
-            this.SolverNameLabel.Name = "SolverNameLabel";
-            this.SolverNameLabel.Size = new System.Drawing.Size(253, 28);
-            this.SolverNameLabel.TabIndex = 3;
-            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "dxf";
             this.saveFileDialog1.Filter = "DXF files|*.dxf|All files|*.*";
             this.saveFileDialog1.Title = "Export as DXF...";
+            // 
+            // SolverCombo
+            // 
+            this.SolverCombo.DisplayMember = "Name";
+            this.SolverCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SolverCombo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SolverCombo.FormattingEnabled = true;
+            this.SolverCombo.Location = new System.Drawing.Point(5, 11);
+            this.SolverCombo.Name = "SolverCombo";
+            this.SolverCombo.Size = new System.Drawing.Size(253, 25);
+            this.SolverCombo.TabIndex = 3;
+            this.SolverCombo.SelectedIndexChanged += new System.EventHandler(this.SolverCombo_SelectedIndexChanged);
             // 
             // gearVisualizer1
             // 
@@ -87,7 +91,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(863, 590);
-            this.Controls.Add(this.SolverNameLabel);
+            this.Controls.Add(this.SolverCombo);
             this.Controls.Add(this.ParamsPanel);
             this.Controls.Add(this.ExportDxfButton);
             this.Controls.Add(this.gearVisualizer1);
@@ -102,8 +106,8 @@
         private GearVisualControl gearVisualizer1;
         private System.Windows.Forms.Button ExportDxfButton;
         private System.Windows.Forms.Panel ParamsPanel;
-        private System.Windows.Forms.Label SolverNameLabel;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ComboBox SolverCombo;
     }
 }
 
