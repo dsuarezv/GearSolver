@@ -16,8 +16,26 @@ namespace CycloidGenerator.Solvers
         public double c = 0;
         public double n = 9;
         public double s = 1000;
-        public double CenterCamDiameter = 22;
-        public double CenterShaftDiameter = 8;
+        public double ccd = 22;
+        public double csd = 8;
+
+        public IList<SolverParameter> GetParams()
+        {
+            return new SolverParameter[]
+            {
+                new SolverParameter("p", "Tooth pitch", 20, 0, 6),
+                new SolverParameter("b", "Roller distance from center (overrides Tooth pitch)", 200, 0, 0),
+                new SolverParameter("d", "Roller diameter", 20, 0, 15),
+                new SolverParameter("e", "Cam eccentricity", 50, 0, 4),
+                new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
+                new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
+                new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 1 },
+                new SolverParameter("s", "Line segments in DXF", 3000, 1, 1000),
+                new SolverParameter("ccd", "Diameter of cam hole", 60, 4, 22),
+                new SolverParameter("csd", "Diameter of driving shaft", 50, 2, 8),
+            };
+        }
+
 
         private static SolverPolar ToPolar(double x, double y)
         {
@@ -181,7 +199,7 @@ namespace CycloidGenerator.Solvers
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
 
-            cl.Circle(new SolverPoint(-e, 0), CenterCamDiameter / 2, 0, "cam");
+            cl.Circle(new SolverPoint(-e, 0), ccd / 2, 0, "cam");
 
             //#generate the pin locations
             //for i in range(0, n+1):
@@ -197,24 +215,7 @@ namespace CycloidGenerator.Solvers
                 cl.Circle(new SolverPoint(x, y), d / 2, 1, "roller");
             }
 
-            cl.Circle(new SolverPoint(0, 0), CenterShaftDiameter / 2, 1, "roller");
-        }
-
-        public IList<SolverParameter> GetParams()
-        {
-            return new SolverParameter[]
-            {
-                new SolverParameter("p", "Tooth pitch", 20, 0, 6),
-                new SolverParameter("b", "Roller distance from center (overrides Tooth pitch)", 200, 0, 0),
-                new SolverParameter("d", "Roller diameter", 20, 0, 15),
-                new SolverParameter("e", "Cam eccentricity", 50, 0, 4),
-                new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
-                new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
-                new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 1 },
-                new SolverParameter("s", "Line segments in DXF", 3000, 1, 1000),
-                new SolverParameter("CenterCamDiameter", "Diameter of cam hole", 60, 4, 22),
-                new SolverParameter("CenterShaftDiameter", "Diameter of driving shaft", 50, 2, 8),
-            };
+            cl.Circle(new SolverPoint(0, 0), csd / 2, 1, "roller");
         }
 
         public string Name

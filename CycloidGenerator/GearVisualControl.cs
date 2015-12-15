@@ -18,6 +18,7 @@ namespace CycloidGenerator
         private Matrix mInverseTransform;
         private Pen[] mPens;
         private Graphics mCurrentGraphics;
+        private float mMonitorDpis = 93;    // My monitor happens to be 93 dpis ;)
 
 
         public ISolver Solver
@@ -57,9 +58,9 @@ namespace CycloidGenerator
 
         protected override void OnResize(EventArgs e)
         {
-            var scale = 3.645320197044335f;
-
             base.OnResize(e);
+
+            var scale = ConvertDpi(mMonitorDpis);
 
             mDirectTransform = new Matrix();
             mDirectTransform.Translate(Width / 2, Height / 2);
@@ -76,8 +77,6 @@ namespace CycloidGenerator
         {
             if (mSolver == null) return;
 
-            mCurrentGraphics = e.Graphics;
-            
             // Apply transformation for centering and any possible rotation correction.
             e.Graphics.Transform = mDirectTransform;
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -85,12 +84,33 @@ namespace CycloidGenerator
             PaintGrid(e.Graphics);
 
             // Draw the thing
+            mCurrentGraphics = e.Graphics;
             mSolver.Run(this);
+            mCurrentGraphics = null;
 
             // Reset transform
             e.Graphics.Transform = new Matrix();
 
-            mCurrentGraphics = null;
+            PaintDebug(e.Graphics);
+        }
+
+        public void Circle(SolverPoint center, double radius, int color, string layer)
+        {
+            if (mCurrentGraphics == null) return;
+
+            mCurrentGraphics.DrawEllipse(mPens[color], new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
+        }
+
+        public void Line(SolverPoint p1, SolverPoint p2, int color, string layer)
+        {
+            if (mCurrentGraphics == null) return;
+
+            mCurrentGraphics.DrawLine(mPens[color], GetPointF(p1), GetPointF(p2));
+        }
+
+        private void PaintDebug(Graphics g)
+        {
+            g.DrawString(GetDebugInfo(), Font, Brushes.Gray, 5, 0);
         }
 
         private void PaintGrid(Graphics g)
@@ -118,6 +138,11 @@ namespace CycloidGenerator
 
         // __ Util ____________________________________________________________
 
+        
+        private string GetDebugInfo()
+        {
+            return string.Format("Grid = 1 cm\nScreen assumed to be {0} dpi.", mMonitorDpis);
+        }
 
         private PointF GetPointF(SolverPoint p)
         {
@@ -142,18 +167,10 @@ namespace CycloidGenerator
             return points[0];
         }
 
-        public void Circle(SolverPoint center, double radius, int color, string layer)
-        {
-            if (mCurrentGraphics == null) return;
-
-            mCurrentGraphics.DrawEllipse(mPens[color], new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
-        }
-
-        public void Line(SolverPoint p1, SolverPoint p2, int color, string layer)
-        {
-            if (mCurrentGraphics == null) return;
-
-            mCurrentGraphics.DrawLine(mPens[color], GetPointF(p1), GetPointF(p2));
+        private static float ConvertDpi(float dpi)
+        { 
+            // Converts points per inch to points per milimiter
+            return dpi / 25.4f;
         }
     }
 }
