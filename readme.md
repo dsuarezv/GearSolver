@@ -31,3 +31,7 @@ Uncomment the line
     SetSolver(new SampleSolver() { Angle = 60 });
 
 in MainForm.cs to see it in action. 
+
+## License
+
+This code is released under the GPL license. 
