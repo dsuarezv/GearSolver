@@ -7,9 +7,7 @@ This is a little utility to help in the design of cycloidal drives. It is a port
 
 with some added features (mainly, the graphical display). This is some quick code I put together one day, but is contains a nice design that allows for easy visualization of any complex formula, so it is rather straightforward to add new gear teeth profile solvers that can be easily visualized as parameters are modified with the sliders and finally exported to DXF. 
 
-Here is a screenshot of an early version: 
-
-![Screenshot](/Screenshots/03.png)
+![Screenshot](/Screenshots/04.gif)
 
 
 ## Installing
