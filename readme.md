@@ -26,11 +26,10 @@ Open the solution in Visual Studio (I used 2013) and build. Alternatively, use m
 
 A solver is just a piece of code that has some input parameters, performs some calculations and draws something out of it. Check a minimal sample in Solvers/SampleSolver.cs for details on how to implement them. 
 
-Uncomment the line 
+It comes down to implementing the ISolver interface, providing the paramters needed by the solver and the code that processes those parameters and performs the drawing. 
 
-    SetSolver(new SampleSolver() { Angle = 60 });
+The SolverManager component already searches the assembly for any ISolver implementations and displays them on the solver combobox.
 
-in MainForm.cs to see it in action. 
 
 ## License
 
