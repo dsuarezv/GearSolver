@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycloidGenerator.Solvers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,6 +31,8 @@ namespace CycloidGenerator
                     s = 1000
                 }
             );
+
+            //SetSolver(new SampleSolver() { Angle = 60 });
         }
 
 
@@ -74,6 +77,8 @@ namespace CycloidGenerator
             dp.Value = p.DefaultValue;
             dp.Caption = p.Caption;
             dp.Hint = p.Hint;
+            dp.LargeChange = p.LargeChange == 0 ? (p.MaxValue - p.MinValue) / 10 : p.LargeChange;
+            dp.SmallChange = p.SmallChange == 0 ? (p.MaxValue - p.MinValue) / 100 : p.SmallChange;
             dp.TargetChanged += (s, e) => { gearVisualizer1.Invalidate(); };
             dp.DependencyObject = mSolver;
 

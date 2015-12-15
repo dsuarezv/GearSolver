@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycloidGenerator.Solvers;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -118,7 +119,7 @@ namespace CycloidGenerator
         // __ Util ____________________________________________________________
 
 
-        private PointF GetPointF(Point p)
+        private PointF GetPointF(SolverPoint p)
         {
             return new PointF((float)p.X, (float)p.Y);
         }
@@ -141,14 +142,14 @@ namespace CycloidGenerator
             return points[0];
         }
 
-        public void Circle(Point center, double radius, int color, string layer)
+        public void Circle(SolverPoint center, double radius, int color, string layer)
         {
             if (mCurrentGraphics == null) return;
 
             mCurrentGraphics.DrawEllipse(mPens[color], new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
         }
 
-        public void Line(Point p1, Point p2, int color, string layer)
+        public void Line(SolverPoint p1, SolverPoint p2, int color, string layer)
         {
             if (mCurrentGraphics == null) return;
 

@@ -4,47 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CycloidGenerator
+namespace CycloidGenerator.Solvers
 {
-    public struct Point
-    {
-        public double X;
-        public double Y;
-
-        public Point(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        // def toRect(r, a):
-        //     return r*math.cos(a), r*math.sin(a)
-        public static Point FromPolar(double r, double angle)
-        {
-            return new Point(r * Math.Cos(angle), r * Math.Sin(angle));
-        }
-    }
-
-
-    public struct Polar
-    {
-        public double D;
-        public double Angle;
-
-        public Polar(double d, double angle)
-        {
-            D = d;
-            Angle = angle;
-        }
-
-        // def toPolar(x, y):
-        //     return (x**2 + y**2)**0.5, math.atan2(y, x)
-        public static Polar FromRect(double x, double y)
-        {
-            return new Polar(Math.Sqrt(x * x + y * y), Math.Atan2(y, x));
-        }
-    }
-
     public class CycloidSolver: ISolver
     {
         public double p;
@@ -58,14 +19,14 @@ namespace CycloidGenerator
         public double CenterCamDiameter = 22;
         public double CenterShaftDiameter = 8;
 
-        private static Polar ToPolar(double x, double y)
+        private static SolverPolar ToPolar(double x, double y)
         {
-            return Polar.FromRect(x, y);
+            return SolverPolar.FromRect(x, y);
         }
 
-        private static Point ToRect(double r, double a)
+        private static SolverPoint ToRect(double r, double a)
         {
-            return Point.FromPolar(r, a);
+            return SolverPoint.FromPolar(r, a);
         }
 
         //def calcyp(a,e,n):
@@ -130,13 +91,13 @@ namespace CycloidGenerator
         //            r = r - offset
         //            x, y = toRect(r, a)
         //    return x, y
-        private Point CheckLimit(double x, double y, double maxrad, double minrad, double offset)
+        private SolverPoint CheckLimit(double x, double y, double maxrad, double minrad, double offset)
         {
             var ra = ToPolar(x, y);
             var r = ra.D;
             var a = ra.Angle;
 
-            var result = new Point(x, y);
+            var result = new SolverPoint(x, y);
 
             if (r > maxrad || r < minrad)
             {
@@ -186,8 +147,8 @@ namespace CycloidGenerator
             var minRadius = CalcPressureLimit(p, d, e, n, minAngle * Math.PI / 180d);
             var maxRadius = CalcPressureLimit(p, d, e, n, maxAngle * Math.PI / 180d);
 
-            cl.Circle(new Point(-e, 0), minRadius, 2, "pressure");
-            cl.Circle(new Point(-e, 0), maxRadius, 2, "pressure");
+            cl.Circle(new SolverPoint(-e, 0), minRadius, 2, "pressure");
+            cl.Circle(new SolverPoint(-e, 0), maxRadius, 2, "pressure");
 
 
             //#generate the cam profile - note: shifted in -x by eccentricicy amount
@@ -214,7 +175,7 @@ namespace CycloidGenerator
                 var y2 = CalcY(p, d, e, n, q * (j + 1));
                 var xy2 = CheckLimit(x2, y2, maxRadius, minRadius, c);
 
-                cl.Line(new Point(xy1.X - e, xy1.Y), new Point(xy2.X - e, xy2.Y), 0, "cam");
+                cl.Line(new SolverPoint(xy1.X - e, xy1.Y), new SolverPoint(xy2.X - e, xy2.Y), 0, "cam");
                 xy1 = xy2;
             }
 
@@ -222,7 +183,7 @@ namespace CycloidGenerator
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
 
-            cl.Circle(new Point(-e, 0), CenterCamDiameter / 2, 0, "cam");
+            cl.Circle(new SolverPoint(-e, 0), CenterCamDiameter / 2, 0, "cam");
 
             //#generate the pin locations
             //for i in range(0, n+1):
@@ -235,10 +196,10 @@ namespace CycloidGenerator
             {
                 var x = p * n * Math.Cos(2 * Math.PI / (n + 1) * k);
                 var y = p * n * Math.Sin(2 * Math.PI / (n + 1) * k);
-                cl.Circle(new Point(x, y), d / 2, 1, "roller");
+                cl.Circle(new SolverPoint(x, y), d / 2, 1, "roller");
             }
 
-            cl.Circle(new Point(0, 0), CenterShaftDiameter / 2, 1, "roller");
+            cl.Circle(new SolverPoint(0, 0), CenterShaftDiameter / 2, 1, "roller");
         }
 
         public IList<SolverParameter> GetParams()
@@ -251,7 +212,7 @@ namespace CycloidGenerator
                 new SolverParameter("e", "Eccentricity", 50, 0, 4),
                 new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
                 new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
-                new SolverParameter("n", "Number of teeth in cam", 20, 0, 9),
+                new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 1 },
                 new SolverParameter("s", "Line segments in DXF", 3000, 1, 1000),
                 new SolverParameter("CenterCamDiameter", "Diameter of cam hole", 60, 4, 22),
                 new SolverParameter("CenterShaftDiameter", "Diameter of driving shaft", 50, 2, 8),

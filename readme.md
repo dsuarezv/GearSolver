@@ -24,3 +24,12 @@ Open the solution in Visual Studio (I used 2013) and build. Alternatively, use m
     msbuild CycloidGenerator.sln
 
 
+## Creating new solvers
+
+A solver is just a piece of code that has some input parameters, performs some calculations and draws something out of it. Check a minimal sample in Solvers/SampleSolver.cs for details on how to implement them. 
+
+Uncomment the line 
+
+    SetSolver(new SampleSolver() { Angle = 60 });
+
+in MainForm.cs to see it in action. 

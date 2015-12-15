@@ -31,14 +31,14 @@
             this.ExportDxfButton = new System.Windows.Forms.Button();
             this.ParamsPanel = new System.Windows.Forms.Panel();
             this.SolverNameLabel = new System.Windows.Forms.Label();
-            this.gearVisualizer1 = new CycloidGenerator.GearVisualControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gearVisualizer1 = new CycloidGenerator.GearVisualControl();
             this.SuspendLayout();
             // 
             // ExportDxfButton
             // 
             this.ExportDxfButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ExportDxfButton.Location = new System.Drawing.Point(3, 510);
+            this.ExportDxfButton.Location = new System.Drawing.Point(3, 555);
             this.ExportDxfButton.Name = "ExportDxfButton";
             this.ExportDxfButton.Size = new System.Drawing.Size(255, 23);
             this.ExportDxfButton.TabIndex = 1;
@@ -48,9 +48,11 @@
             // 
             // ParamsPanel
             // 
+            this.ParamsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ParamsPanel.Location = new System.Drawing.Point(3, 45);
             this.ParamsPanel.Name = "ParamsPanel";
-            this.ParamsPanel.Size = new System.Drawing.Size(255, 459);
+            this.ParamsPanel.Size = new System.Drawing.Size(255, 504);
             this.ParamsPanel.TabIndex = 2;
             // 
             // SolverNameLabel
@@ -61,6 +63,12 @@
             this.SolverNameLabel.Size = new System.Drawing.Size(253, 28);
             this.SolverNameLabel.TabIndex = 3;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "dxf";
+            this.saveFileDialog1.Filter = "DXF files|*.dxf|All files|*.*";
+            this.saveFileDialog1.Title = "Export as DXF...";
+            // 
             // gearVisualizer1
             // 
             this.gearVisualizer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -69,22 +77,16 @@
             this.gearVisualizer1.DrawGrid = true;
             this.gearVisualizer1.Location = new System.Drawing.Point(264, 13);
             this.gearVisualizer1.Name = "gearVisualizer1";
-            this.gearVisualizer1.Size = new System.Drawing.Size(551, 520);
+            this.gearVisualizer1.Size = new System.Drawing.Size(587, 565);
             this.gearVisualizer1.Solver = null;
             this.gearVisualizer1.TabIndex = 0;
             this.gearVisualizer1.Text = "cycloidControl1";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "dxf";
-            this.saveFileDialog1.Filter = "DXF files|*.dxf|All files|*.*";
-            this.saveFileDialog1.Title = "Export as DXF...";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 545);
+            this.ClientSize = new System.Drawing.Size(863, 590);
             this.Controls.Add(this.SolverNameLabel);
             this.Controls.Add(this.ParamsPanel);
             this.Controls.Add(this.ExportDxfButton);

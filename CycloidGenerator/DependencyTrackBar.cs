@@ -12,10 +12,13 @@ namespace CycloidGenerator
 {
     public partial class DependencyTrackBar : UserControl
     {
+        private const double FixedPointMultiplier = 100d;
+
         private object mDepObject;
         private string mDepPropertyName;
         private string mCaption;
         private string mHint; 
+
 
 
         public event EventHandler TargetChanged;
@@ -46,32 +49,36 @@ namespace CycloidGenerator
         
         public double Minimum 
         {
-            get { return trackBar1.Minimum / 100d; }
-            set { trackBar1.Minimum = (int)(value * 100d); }
+            get { return trackBar1.Minimum / FixedPointMultiplier; }
+            set { trackBar1.Minimum = (int)(value * FixedPointMultiplier); }
         }
         
         public double Maximum 
         {
-            get { return trackBar1.Maximum / 100d; }
-            set { trackBar1.Maximum = (int)(value * 100d); } 
+            get { return trackBar1.Maximum / FixedPointMultiplier; }
+            set { trackBar1.Maximum = (int)(value * FixedPointMultiplier); } 
         }
 
         public double Value
         {
-            get { return trackBar1.Value / 100d; }
-            set { trackBar1.Value = (int)(value * 100d); }
+            get { return trackBar1.Value / FixedPointMultiplier; }
+            set { trackBar1.Value = (int)(value * FixedPointMultiplier); }
         }
 
         public double LargeChange
         {
-            get { return trackBar1.LargeChange / 100d; }
-            set { trackBar1.LargeChange = (int)(value * 100d); }
+            get { return trackBar1.LargeChange / FixedPointMultiplier; }
+            set { trackBar1.LargeChange = (int)(value * FixedPointMultiplier); }
         }
 
         public double SmallChange
         {
-            get { return trackBar1.SmallChange / 100d; }
-            set { trackBar1.SmallChange = (int)(value * 100d); }
+            get { return trackBar1.SmallChange / FixedPointMultiplier; }
+            set 
+            { 
+                trackBar1.SmallChange = (int)(value * FixedPointMultiplier); 
+                trackBar1.TickFrequency = trackBar1.LargeChange; 
+            }
         }
 
         public DependencyTrackBar()
@@ -81,6 +88,13 @@ namespace CycloidGenerator
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
+            var bar = (TrackBar)sender;
+            
+            if (bar.Value % bar.SmallChange != 0)
+            {
+                bar.Value = bar.SmallChange * ((bar.Value + bar.SmallChange / 2) / bar.SmallChange);
+            }
+
             WriteToObject();
         }
 

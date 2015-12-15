@@ -70,7 +70,7 @@
             this.Controls.Add(this.CaptionLabel);
             this.Controls.Add(this.trackBar1);
             this.Name = "DependencyTrackBar";
-            this.Size = new System.Drawing.Size(228, 45);
+            this.Size = new System.Drawing.Size(228, 47);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
