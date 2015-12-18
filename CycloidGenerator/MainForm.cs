@@ -20,21 +20,6 @@ namespace CycloidGenerator
             InitializeComponent();
 
             InitSolvers();
-
-            //SetSolver(
-            //    new ZinclandCycloidSolver()
-            //    {
-            //        p = 6,
-            //        d = 15,
-            //        e = 4,
-            //        ang = 50.0,
-            //        c = 0,
-            //        n = 10,
-            //        s = 1000
-            //    }
-            //);
-
-            //SetSolver(new SampleSolver() { Angle = 60 });
         }
 
 
@@ -48,7 +33,7 @@ namespace CycloidGenerator
                 SolverCombo.Items.Add(s);
             }
 
-            SolverCombo.SelectedIndex = 0;
+            SolverCombo.SelectedIndex = 1;
         }
 
         private void SetSolver(ISolver solver)
@@ -81,7 +66,7 @@ namespace CycloidGenerator
         private void CreateTrackBarForParam(SolverParameter p, ref int y)
         {
             const int NumLargeChangeDivisions = 10;
-            const int NumSmallChangeDivisions = 100;
+            const int NumSmallChangeDivisions = 200;
 
             var dp = new DependencyTrackBar();
 

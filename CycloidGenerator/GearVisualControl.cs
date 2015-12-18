@@ -52,7 +52,8 @@ namespace CycloidGenerator
                 new Pen(Color.Red, width * 2f),
                 new Pen(Color.Gray, width),
                 new Pen(Color.LightGray, width),
-                new Pen(Color.FromArgb(230, 230, 230), width)
+                new Pen(Color.FromArgb(230, 230, 230), width),
+                new Pen(Color.FromArgb(210, 210, 210), width)
             };
         }
 
@@ -124,6 +125,10 @@ namespace CycloidGenerator
             for (int x = gridMin; x <= gridMax; x += gridStep) g.DrawLine(p, x, gridMin, x, gridMax);
             for (int y = gridMin; y <= gridMax; y += gridStep) g.DrawLine(p, gridMin, y, gridMax, y);
 
+            var pa = GetPen("axis");
+            g.DrawLine(pa, gridMin, 0, gridMax, 0);
+            g.DrawLine(pa, 0, gridMin, 0, gridMax);
+
         }
 
         private Pen GetPen(string penName)
@@ -131,6 +136,7 @@ namespace CycloidGenerator
             switch (penName)
             {
                 case "grid": return mPens[3];
+                case "axis": return mPens[4];
                 default: return Pens.Black;
             }
         }

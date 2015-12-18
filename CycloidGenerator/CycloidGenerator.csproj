@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="SolverManager.cs" />
     <Compile Include="Solvers\Common.cs" />
+    <Compile Include="Solvers\SineWaveSolver.cs" />
     <Compile Include="Solvers\ZinclandCycloidSolver.cs" />
     <Compile Include="GearVisualControl.cs">
       <SubType>Component</SubType>
