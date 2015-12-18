@@ -121,5 +121,37 @@ namespace CycloidGenerator
 
             ValueLabel.Text = Value.ToString();
         }
+
+
+        // __ ValueTextbox impl _______________________________________________
+
+
+        private void ValueTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                double val;
+                if (double.TryParse(ValueTextbox.Text, out val))
+                {
+                    Value = val;
+                }
+
+                SetTextBox(false);
+            }
+        }
+
+        private void SetTextBox(bool visible)
+        {
+            ValueLabel.Visible = !visible;
+            ValueTextbox.Visible = visible;
+        }
+
+        private void ValueLabel_DoubleClick(object sender, EventArgs e)
+        {
+            ValueTextbox.Text = Value.ToString();
+            ValueTextbox.SelectAll();
+            SetTextBox(true);
+            ValueTextbox.Focus();
+        }
     }
 }

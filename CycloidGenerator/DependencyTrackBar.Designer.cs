@@ -31,6 +31,7 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.CaptionLabel = new System.Windows.Forms.Label();
             this.ValueLabel = new System.Windows.Forms.Label();
+            this.ValueTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,11 +62,24 @@
             this.ValueLabel.Size = new System.Drawing.Size(37, 23);
             this.ValueLabel.TabIndex = 2;
             this.ValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ValueLabel.DoubleClick += new System.EventHandler(this.ValueLabel_DoubleClick);
+            // 
+            // ValueTextbox
+            // 
+            this.ValueTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueTextbox.Location = new System.Drawing.Point(192, 15);
+            this.ValueTextbox.Name = "ValueTextbox";
+            this.ValueTextbox.Size = new System.Drawing.Size(34, 20);
+            this.ValueTextbox.TabIndex = 3;
+            this.ValueTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ValueTextbox.Visible = false;
+            this.ValueTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ValueTextbox_KeyDown);
             // 
             // DependencyTrackBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ValueTextbox);
             this.Controls.Add(this.ValueLabel);
             this.Controls.Add(this.CaptionLabel);
             this.Controls.Add(this.trackBar1);
@@ -82,5 +96,6 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label CaptionLabel;
         private System.Windows.Forms.Label ValueLabel;
+        private System.Windows.Forms.TextBox ValueTextbox;
     }
 }
