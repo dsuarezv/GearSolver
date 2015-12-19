@@ -9,14 +9,9 @@ with some added features (mainly, the graphical display). This is some quick cod
 
 ![Screenshot](/Screenshots/04.gif)
 
-This is a motion simulation of the resulting gear: 
+This is a sample motion simulation of the exported DXF:
 
-![Screenshot](/Screenshots/05.gif)
-
-
-## Installing
-
-The instalation is pretty straightforward, just unzip and run the .exe. 
+![Screenshot](/Screenshots/06.gif)
 
 
 ## Building
