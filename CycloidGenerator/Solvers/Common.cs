@@ -23,6 +23,11 @@ namespace CycloidGenerator.Solvers
         {
             return new SolverPoint(r * Math.Cos(angle), r * Math.Sin(angle));
         }
+
+        public override string ToString()
+        {
+            return string.Format("({0:0.0000}, {1:0.0000})", X, Y);
+        }
     }
 
 

@@ -9,9 +9,9 @@ namespace CycloidGenerator.Solvers
     public class ZinclandCycloidSolver: ISolver
     {
         public double p = 6;
-        public double b = 0;
-        public double d = 15;
-        public double e = 4;
+        public double b = 24;
+        public double d = 6;
+        public double e = 2;
         public double ang = 50;
         public double c = 0;
         public double n = 9;
@@ -24,9 +24,9 @@ namespace CycloidGenerator.Solvers
             return new SolverParameter[]
             {
                 new SolverParameter("p", "Tooth pitch", 20, 0, 6),
-                new SolverParameter("b", "Roller distance from center (overrides Tooth pitch)", 200, 0, 0),
-                new SolverParameter("d", "Roller diameter", 20, 0, 15),
-                new SolverParameter("e", "Cam eccentricity", 50, 0, 4),
+                new SolverParameter("b", "Roller distance from center (overrides Tooth pitch)", 200, 0, 24),
+                new SolverParameter("d", "Roller diameter", 20, 0, 6),
+                new SolverParameter("e", "Cam eccentricity", 50, 0, 2),
                 new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
                 new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
                 new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 1 },
@@ -179,21 +179,28 @@ namespace CycloidGenerator.Solvers
             //    dxf.append( sdxf.Line(points=[(x1-e,y1),  (x2-e,y2)], layer="cam" ) )
             //        x1 = x2
             //        y1 = y2
-
             var points = new List<SolverPoint>();
 
-            for (int j = 0; j <= s; ++j)
+            var ii = 0;
+            var x1 = CalcX(p, d, e, n, q * ii);
+            var y1 = CalcY(p, d, e, n, q * ii);
+            var xy1 = CheckLimit(x1, y1, maxRadius, minRadius, c);
+            xy1.X -= e;
+            points.Add(xy1);
+
+            for (int j = 0; j < s; ++j)
             {
-                var x2 = CalcX(p, d, e, n, q * (j));
-                var y2 = CalcY(p, d, e, n, q * (j));
+                var x2 = CalcX(p, d, e, n, q * (j + 1));
+                var y2 = CalcY(p, d, e, n, q * (j + 1));
                 var xy2 = CheckLimit(x2, y2, maxRadius, minRadius, c);
 
                 xy2.X -= e;
-
                 points.Add(xy2);
             }
 
             cl.Spline(points, 0, "cam");
+
+
 
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )
