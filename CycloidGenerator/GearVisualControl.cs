@@ -102,6 +102,20 @@ namespace CycloidGenerator
             mCurrentGraphics.DrawEllipse(mPens[color], new RectangleF((float)(center.X - radius), (float)(center.Y - radius), (float)(radius * 2), (float)(radius * 2)));
         }
 
+        public void Spline(IList<SolverPoint> points, int color, string layer)
+        {
+            if (mCurrentGraphics == null) return;
+
+            var gdiPoints = new PointF[points.Count];
+            for (int i = 0; i < points.Count; ++i) 
+            {
+                var p = points[i];
+                gdiPoints[i] = new PointF((float)p.X, (float)p.Y);
+            }
+
+            mCurrentGraphics.DrawCurve(mPens[color], gdiPoints);
+        }
+
         public void Line(SolverPoint p1, SolverPoint p2, int color, string layer)
         {
             if (mCurrentGraphics == null) return;

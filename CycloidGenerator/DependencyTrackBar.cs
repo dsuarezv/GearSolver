@@ -88,12 +88,12 @@ namespace CycloidGenerator
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            var bar = (TrackBar)sender;
+            //var bar = (TrackBar)sender;
             
-            if (bar.Value % bar.SmallChange != 0)
-            {
-                bar.Value = bar.SmallChange * ((bar.Value + bar.SmallChange / 2) / bar.SmallChange);
-            }
+            //if (bar.Value % bar.SmallChange != 0)
+            //{
+            //    bar.Value = bar.SmallChange * ((bar.Value + bar.SmallChange / 2) / bar.SmallChange);
+            //}
 
             WriteToObject();
         }

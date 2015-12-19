@@ -180,21 +180,20 @@ namespace CycloidGenerator.Solvers
             //        x1 = x2
             //        y1 = y2
 
-            var ii = 0;
-            var x1 = CalcX(p, d, e, n, q * ii);
-            var y1 = CalcY(p, d, e, n, q * ii);
-            var xy1 = CheckLimit(x1, y1, maxRadius, minRadius, c);
+            var points = new List<SolverPoint>();
 
-            for (int j = 0; j < s; ++j)
+            for (int j = 0; j <= s; ++j)
             {
-                var x2 = CalcX(p, d, e, n, q * (j + 1));
-                var y2 = CalcY(p, d, e, n, q * (j + 1));
+                var x2 = CalcX(p, d, e, n, q * (j));
+                var y2 = CalcY(p, d, e, n, q * (j));
                 var xy2 = CheckLimit(x2, y2, maxRadius, minRadius, c);
 
-                cl.Line(new SolverPoint(xy1.X - e, xy1.Y), new SolverPoint(xy2.X - e, xy2.Y), 0, "cam");
-                xy1 = xy2;
+                xy2.X -= e;
+
+                points.Add(xy2);
             }
 
+            cl.Spline(points, 0, "cam");
 
             //#add a circle in the center of the cam
             //dxf.append( sdxf.Circle(center=(-e, 0), radius=d/2, layer="cam") )

@@ -12,5 +12,6 @@ namespace CycloidGenerator
     {
         void Circle(SolverPoint center, double radius, int color, string layer);
         void Line(SolverPoint p1, SolverPoint p2, int color, string layer);
+        void Spline(IList<SolverPoint> points, int color, string layer);
     }
 }
