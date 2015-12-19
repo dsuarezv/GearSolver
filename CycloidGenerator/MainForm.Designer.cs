@@ -32,7 +32,7 @@
             this.ParamsPanel = new System.Windows.Forms.Panel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SolverCombo = new System.Windows.Forms.ComboBox();
-            this.gearVisualizer1 = new CycloidGenerator.GearVisualControl();
+            this.gearVisualizer1 = new CycloidGenerator.SolverGraphControl();
             this.SuspendLayout();
             // 
             // ExportDxfButton
@@ -103,7 +103,7 @@
 
         #endregion
 
-        private GearVisualControl gearVisualizer1;
+        private SolverGraphControl gearVisualizer1;
         private System.Windows.Forms.Button ExportDxfButton;
         private System.Windows.Forms.Panel ParamsPanel;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;

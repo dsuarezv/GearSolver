@@ -51,7 +51,7 @@
     <Compile Include="Solvers\Common.cs" />
     <Compile Include="Solvers\SineWaveSolver.cs" />
     <Compile Include="Solvers\ZinclandCycloidSolver.cs" />
-    <Compile Include="GearVisualControl.cs">
+    <Compile Include="SolverGraphControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DependencyTrackBar.cs">

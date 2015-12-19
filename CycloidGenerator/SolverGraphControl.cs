@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CycloidGenerator
 {
-    public class GearVisualControl: Control, IExportClient
+    public class SolverGraphControl: Control, IExportClient
     {
         private ISolver mSolver;
         private bool mDrawGrid = true;
@@ -34,7 +34,7 @@ namespace CycloidGenerator
         }
 
 
-        public GearVisualControl()
+        public SolverGraphControl()
         {
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint
