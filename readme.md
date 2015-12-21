@@ -11,7 +11,7 @@ with some added features (mainly, the graphical display). This is some quick cod
 
 This is a sample motion simulation of the exported DXF:
 
-![Screenshot](/Screenshots/06.gif)
+![Screenshot](/Screenshots/07.gif)
 
 
 ## Building
