@@ -15,7 +15,7 @@ namespace CycloidGenerator
     {
         private DxfDocument mDxf = new DxfDocument();
 
-        public static void ExportCycloid(ISolver target, string fileName)
+        public static void Export(ISolver target, string fileName)
         {
             var exporter = new DxfExporter();
 

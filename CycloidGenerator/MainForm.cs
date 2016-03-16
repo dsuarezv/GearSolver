@@ -1,9 +1,12 @@
 ﻿using CycloidGenerator.Solvers;
+using MadMilkman.Ini;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,9 +93,18 @@ namespace CycloidGenerator
 
         private void ExportDxfButton_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (dxfSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                DxfExporter.ExportCycloid(mSolver, saveFileDialog1.FileName);
+                DxfExporter.Export(mSolver, dxfSaveFileDialog.FileName);
+            }
+        }
+
+
+        private void SaveParamsButton_Click(object sender, EventArgs e)
+        {
+            if (cfgSaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                SaveCurrentParams(cfgSaveFileDialog.FileName);
             }
         }
 
@@ -100,5 +112,69 @@ namespace CycloidGenerator
         {
             SetSolver(SolverCombo.SelectedItem as ISolver);
         }
+
+
+        // __ Config serialization ____________________________________________
+
+
+        private void SaveCurrentParams(string fileName)
+        {
+            var ini = new IniFile();
+            var data = ini.Sections.Add("Data");
+
+            foreach (Control c in ParamsPanel.Controls)
+            {
+                var t = c as DependencyTrackBar;
+                if (t == null) continue;
+
+                data.Keys.Add(t.DependencyPropertyName, t.Value.ToString(CultureInfo.InvariantCulture));
+            }
+
+            ini.Save(fileName);
+        }
+
+        private void LoadParams(string fileName)
+        {
+            var ini = new IniFile();
+            ini.Load(fileName);
+            var data = ini.Sections["Data"];
+
+            foreach (Control c in ParamsPanel.Controls)
+            {
+                var t = c as DependencyTrackBar;
+                if (t == null) continue;
+
+                t.Value = double.Parse(data.Keys[t.DependencyPropertyName].Value, CultureInfo.InvariantCulture);
+            }            
+        }
+
+        
+        // __ Drag & drop _____________________________________________________
+
+        
+        private void gearVisualizer1_DragEnter(object sender, DragEventArgs e)
+        {
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            if (fileList.Length != 1) return;
+
+            var ext = Path.GetExtension(fileList[0]);
+            if (ext.ToLower() != ".solvercfg") return;
+
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void gearVisualizer1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length != 1) return;
+
+            LoadParams(files[0]);
+        }
+
+        private void gearVisualizer1_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
+
     }
 }
