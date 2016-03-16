@@ -39,6 +39,16 @@ namespace CycloidGenerator
             SolverCombo.SelectedIndex = 1;
         }
 
+        private void SetSolverByName(string solverName)
+        {
+            var solvers = SolverManager.GetSolvers();
+
+            foreach (var s in solvers)
+            {
+                if (s.Name == solverName) SetSolver(s);
+            }
+        }
+
         private void SetSolver(ISolver solver)
         {
             if (solver == null) return;
@@ -121,6 +131,7 @@ namespace CycloidGenerator
         {
             var ini = new IniFile();
             var data = ini.Sections.Add("Data");
+            data.Keys.Add("Solver", mSolver.Name);
 
             foreach (Control c in ParamsPanel.Controls)
             {
@@ -139,6 +150,9 @@ namespace CycloidGenerator
             ini.Load(fileName);
             var data = ini.Sections["Data"];
 
+            var solver = data.Keys["Solver"].Value;
+            if (solver != mSolver.Name) SetSolverByName(solver);
+            
             foreach (Control c in ParamsPanel.Controls)
             {
                 var t = c as DependencyTrackBar;
