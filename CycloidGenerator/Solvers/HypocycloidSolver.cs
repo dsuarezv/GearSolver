@@ -8,8 +8,6 @@ namespace CycloidGenerator.Solvers
 {
     public class HypocycloidSolver: CircularSolver, ISolver
     {
-        private const double Deg2Rad = Math.PI / 180d;
-
 
         public double A;
         public double B;
@@ -17,12 +15,12 @@ namespace CycloidGenerator.Solvers
 
         public string Name
         {
-            get { return "Hypocloid solver"; }
+            get { return "Hypocloid"; }
         }
 
         public string Description
         {
-            get { return "An hypocycloid curve generator"; }
+            get { return "An hypocycloid curve generator. https://en.wikipedia.org/wiki/Hypocycloid"; }
         }
 
         public IList<SolverParameter> GetParams()
@@ -31,11 +29,14 @@ namespace CycloidGenerator.Solvers
             { 
                 new SolverParameter("A", "Radius of directing pitch circle", 60, 0, 25),
                 new SolverParameter("B", "Radius of rolling circle", 30, 0, 5),
-                new SolverParameter("MaxAngle", "MaxAngle", 3600, 0, 360),
             };
         }
 
-        
+
+        public HypocycloidSolver()
+        {
+            //MaxAngle = 360 * 4;
+        }
 
         
         protected override void AfterCircle(IExportClient cl)
@@ -45,12 +46,12 @@ namespace CycloidGenerator.Solvers
 
         protected override SolverPoint GetCircularPoint(int step, double angleRads, IExportClient cl)
         {
-            var common = (A - B) / A * angleRads;
+            var v = (A - B) / B * angleRads;
 
             var centerX = (A - B) * Math.Cos(angleRads);
             var centerY = (A - B) * Math.Sin(angleRads);
-            var x = centerX + B * Math.Cos(common);
-            var y = centerY - B * Math.Sin(common);
+            var x = centerX + B * Math.Cos(v);
+            var y = centerY - B * Math.Sin(v);
 
             var result = new SolverPoint(x, y);
 

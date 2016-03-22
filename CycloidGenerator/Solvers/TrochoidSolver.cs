@@ -13,7 +13,7 @@ namespace CycloidGenerator.Solvers
 
         public string Name
         {
-            get { return "Trochoid solver"; }
+            get { return "Trochoid"; }
         }
 
         public string Description
