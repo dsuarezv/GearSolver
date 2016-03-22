@@ -53,6 +53,9 @@
   <ItemGroup>
     <Compile Include="SolverManager.cs" />
     <Compile Include="Solvers\Common.cs" />
+    <Compile Include="Solvers\CircularSolver.cs" />
+    <Compile Include="Solvers\HypocycloidSolver.cs" />
+    <Compile Include="Solvers\TrochoidSolver.cs" />
     <Compile Include="Solvers\SineWaveSolver.cs" />
     <Compile Include="Solvers\ZinclandCycloidSolver.cs" />
     <Compile Include="SolverGraphControl.cs">

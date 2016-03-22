@@ -25,7 +25,7 @@ namespace CycloidGenerator
 
             foreach (var t in a.GetTypes())
             {
-                if (t.GetTypeInfo().GetInterface("ISolver") != null)
+                if (t.GetTypeInfo().GetInterface("ISolver") != null && !t.GetTypeInfo().IsAbstract)
                 {
                     CreateSolverInstance(t);
                 }

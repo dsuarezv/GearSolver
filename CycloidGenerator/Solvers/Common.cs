@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace CycloidGenerator.Solvers
 {
-    public struct SolverPoint
+    public class SolverPoint
     {
+        public static readonly SolverPoint Default = new SolverPoint(double.MinValue, double.MinValue);
+
         public double X;
         public double Y;
+
+        public SolverPoint()
+        { 
+        
+        }
 
         public SolverPoint(double x, double y)
         {

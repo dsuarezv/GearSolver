@@ -38,7 +38,7 @@ namespace CycloidGenerator
         public object DependencyObject 
         {
             get { return mDepObject; }
-            set { mDepObject = value; ReadFromObject(); }
+            set { mDepObject = value; WriteToObject(); }
         }
         
         public string DependencyPropertyName 
@@ -133,6 +133,8 @@ namespace CycloidGenerator
                 double val;
                 if (double.TryParse(ValueTextbox.Text, out val))
                 {
+                    if (Maximum < val) Maximum = val;
+                    if (Minimum > val) Minimum = val;
                     Value = val;
                 }
 

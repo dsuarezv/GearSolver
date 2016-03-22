@@ -56,6 +56,14 @@ namespace CycloidGenerator
             mDxf.AddEntity(e);    
         }
 
+        public void Point(SolverPoint p1, int color, string layer)
+        {
+            var l = GetLayer(mDxf, layer);
+            var p = new Point(p1.X, p1.Y, 0);
+            p.Layer = l;
+            mDxf.AddEntity(p);
+        }
+
         private Layer GetLayer(DxfDocument dxf, string layerName)
         {
             if (dxf.Layers.Contains(layerName)) return dxf.Layers[layerName];

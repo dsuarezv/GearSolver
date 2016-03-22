@@ -53,7 +53,8 @@ namespace CycloidGenerator
                 new Pen(Color.Gray, width),
                 new Pen(Color.LightGray, width),
                 new Pen(Color.FromArgb(230, 230, 230), width),
-                new Pen(Color.FromArgb(210, 210, 210), width)
+                new Pen(Color.FromArgb(210, 210, 210), width), 
+                new Pen(Color.Black, width / 2f),
             };
         }
 
@@ -121,6 +122,17 @@ namespace CycloidGenerator
             if (mCurrentGraphics == null) return;
 
             mCurrentGraphics.DrawLine(mPens[color], GetPointF(p1), GetPointF(p2));
+        }
+
+        public void Point(SolverPoint p, int color, string layer)
+        {
+            if (mCurrentGraphics == null) return;
+
+            const float radius = 0.3f;
+            var rect = new RectangleF((float)p.X - radius, (float)p.Y - radius, radius * 2, radius * 2);
+
+            mCurrentGraphics.DrawEllipse(mPens[color], rect);
+
         }
 
         private void PaintDebug(Graphics g)
