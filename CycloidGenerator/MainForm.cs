@@ -36,7 +36,7 @@ namespace CycloidGenerator
                 SolverCombo.Items.Add(s);
             }
 
-            SolverCombo.SelectedIndex = 3;
+            SolverCombo.SelectedIndex = 0;
         }
 
         private void SetSolverByName(string solverName)

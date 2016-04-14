@@ -8,14 +8,18 @@ namespace CycloidGenerator.Solvers
 {
     public abstract class CircularSolver
     {
-        private const double Deg2Rad = Math.PI / 180d;
+        public const double Deg2Rad = Math.PI / 180d;
 
         public double MinAngle = 0;
         public double MaxAngle = 360;
-        public double NumSteps = 1000;
+        public double NumSteps = 3000;
+
+        protected IExportClient mClient;
 
         public void Run(IExportClient cl)
         {
+            mClient = cl;
+
             BeforeCircle(cl);
 
             SolverPoint last = null;
