@@ -8,6 +8,8 @@ namespace CycloidGenerator
 {
     public class SolverParameter
     {
+        private double mValue;
+
         public string DependencyPropertyName;
         public string Caption;
         public string Hint;
@@ -16,7 +18,18 @@ namespace CycloidGenerator
         public double DefaultValue;
         public double LargeChange;
         public double SmallChange;
-        public double Value;
+        
+        public bool IsInteger = false;
+        public bool IsReadOnly = false;
+
+        public double Value
+        {
+            get { return mValue; }
+            set { mValue = value; ValueChanged?.Invoke(mValue); }
+        }
+
+
+        public event Action<double> ValueChanged;
 
 
         public SolverParameter(string depPropName, string caption, double maxv, double minv, double defv)

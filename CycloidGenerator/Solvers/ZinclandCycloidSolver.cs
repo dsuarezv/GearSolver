@@ -29,7 +29,7 @@ namespace CycloidGenerator.Solvers
                 new SolverParameter("e", "Cam eccentricity", 50, 0, 2),
                 new SolverParameter("ang", "Pressure angle limit", 89, 0, 50),
                 new SolverParameter("c", "Offset in pressure angle", 20, 0, 0),
-                new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 1 },
+                new SolverParameter("n", "Number of teeth in cam", 20, 2, 9) { SmallChange = 1, LargeChange = 5, IsInteger = true },
                 new SolverParameter("s", "Line segments in DXF", 3000, 1, 1000),
                 new SolverParameter("ccd", "Diameter of cam hole", 60, 4, 22),
                 new SolverParameter("csd", "Diameter of driving shaft", 50, 2, 8),

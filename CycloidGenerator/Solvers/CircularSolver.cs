@@ -12,7 +12,7 @@ namespace CycloidGenerator.Solvers
 
         public double MinAngle = 0;
         public double MaxAngle = 360;
-        public double NumSteps = 3000;
+        public double NumSteps = 3600;
 
         protected IExportClient mClient;
 

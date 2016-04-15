@@ -86,6 +86,7 @@ namespace CycloidGenerator
             dp.DependencyPropertyName = p.DependencyPropertyName;
             dp.Width = ParamsPanel.Width;
             dp.Top = y;
+            dp.IsInteger = p.IsInteger;
             dp.Maximum = p.MaxValue; 
             dp.Minimum = p.MinValue;
             dp.Value = p.DefaultValue;

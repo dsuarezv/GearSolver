@@ -14,14 +14,30 @@ namespace CycloidGenerator
     {
         private const double FixedPointMultiplier = 100d;
 
+        private double mDivider = FixedPointMultiplier;
         private object mDepObject;
         private string mDepPropertyName;
         private string mCaption;
-        private string mHint; 
+        private string mHint;
+        private bool mIsInteger = false;
+        private bool mIsReadOnly = false;
 
 
 
         public event EventHandler TargetChanged;
+
+
+        public bool IsReadOnly
+        {
+            get { return mIsReadOnly; }
+            set { mIsReadOnly = value; }
+        }
+
+        public bool IsInteger
+        {
+            get { return mIsInteger; }
+            set { mIsInteger = value; mDivider = mIsInteger ? 1 : FixedPointMultiplier; }
+        }
 
         public string Caption
         {
@@ -49,34 +65,34 @@ namespace CycloidGenerator
         
         public double Minimum 
         {
-            get { return trackBar1.Minimum / FixedPointMultiplier; }
-            set { trackBar1.Minimum = (int)(value * FixedPointMultiplier); }
+            get { return trackBar1.Minimum / mDivider; }
+            set { trackBar1.Minimum = (int)(value * mDivider); }
         }
         
         public double Maximum 
         {
-            get { return trackBar1.Maximum / FixedPointMultiplier; }
-            set { trackBar1.Maximum = (int)(value * FixedPointMultiplier); } 
+            get { return trackBar1.Maximum / mDivider; }
+            set { trackBar1.Maximum = (int)(value * mDivider); } 
         }
 
         public double Value
         {
-            get { return trackBar1.Value / FixedPointMultiplier; }
-            set { trackBar1.Value = (int)(value * FixedPointMultiplier); }
+            get { return trackBar1.Value / mDivider; }
+            set { trackBar1.Value = (int)(value * mDivider); }
         }
 
         public double LargeChange
         {
-            get { return trackBar1.LargeChange / FixedPointMultiplier; }
-            set { trackBar1.LargeChange = (int)(value * FixedPointMultiplier); }
+            get { return trackBar1.LargeChange / mDivider; }
+            set { trackBar1.LargeChange = (int)(value * mDivider); }
         }
 
         public double SmallChange
         {
-            get { return trackBar1.SmallChange / FixedPointMultiplier; }
+            get { return trackBar1.SmallChange / mDivider; }
             set 
             { 
-                trackBar1.SmallChange = (int)(value * FixedPointMultiplier); 
+                trackBar1.SmallChange = (int)(value * mDivider); 
                 trackBar1.TickFrequency = trackBar1.LargeChange; 
             }
         }

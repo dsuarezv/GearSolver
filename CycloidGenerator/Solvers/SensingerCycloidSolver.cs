@@ -14,6 +14,11 @@ namespace CycloidGenerator.Solvers
         //public double Y;
         public double E;
         public double CamDiameter;
+        public double deo;
+        public double dR;
+        public double dcs;
+        public double dcp;
+        public double djb;
 
 
 
@@ -33,10 +38,15 @@ namespace CycloidGenerator.Solvers
             { 
                 new SolverParameter("R", "Roller distance from center", 60, 0, 25),
                 new SolverParameter("Rr", "Radius of the rollers", 60, 0, 2.5),
-                new SolverParameter("Z1", "Num teeth", 60, 0, 10),
+                new SolverParameter("Z1", "Num teeth", 60, 0, 10) { IsInteger = true, SmallChange = 1 },
                 //new SolverParameter("Y", "Contact angle between cycloid lobe and roller", 90, 0, 25),
                 new SolverParameter("E", "Eccentricity", 10, 0, 1.5),
                 new SolverParameter("CamDiameter", "Cam center diameter", 50, 5, 22),
+                new SolverParameter("deo", "Tolerance of the input cam eccentricity (deo)", 1, 0, 0),
+                new SolverParameter("dR", "Offset of the holes in the ground structure for the rollers (dR)", 1, 0, 0),
+                new SolverParameter("dcs", "Offset of the input shaft of the cycloid disk (dcs)", 1, 0, 0),
+                new SolverParameter("dcp", "Offset of the cycloid profile (dcp)", 1, 0, 0),
+                new SolverParameter("djb", "Axial play in the journal bearing of the rollers (djb)", 1, 0, 0),
             };
         }
 
@@ -47,27 +57,27 @@ namespace CycloidGenerator.Solvers
 
             // R constraint
 
-            //var Rmin = Math.Sqrt(
-            //    (Rr * Rr * Math.Pow(Z1 + 2, 3)) /
-            //    (27 * Z1)
-            //    + E * E * Math.Pow(Z1 + 1, 2));
+            var Rmin = Math.Sqrt(
+                (Rr * Rr * Math.Pow(Z1 + 2, 3)) /
+                (27 * Z1)
+                + E * E * Math.Pow(Z1 + 1, 2));
 
-            //if (R < Rmin) R = Rmin;
+            if (R < Rmin) R = Rmin;
 
 
             // Rr constraint
 
-            //var Rrmax1 = R * Math.Sin(Math.PI / (Z1 + 1));
-            //var Rrmax2 = Math.Sqrt(
-            //    (27 * Z1 * (R * R - E * E * (Z1 + 1) * (Z1 + 1))) /
-            //    Math.Pow(Z1 + 2, 3));
+            var Rrmax1 = R * Math.Sin(Math.PI / (Z1 + 1));
+            var Rrmax2 = Math.Sqrt(
+                (27 * Z1 * (R * R - E * E * (Z1 + 1) * (Z1 + 1))) /
+                Math.Pow(Z1 + 2, 3));
 
-            //var Rrmax = Math.Min(Rrmax1, Rrmax2);
+            var Rrmax = Math.Min(Rrmax1, Rrmax2);
 
-            //if (Rr > Rrmax) Rr = Rrmax;
+            if (Rr > Rrmax) Rr = Rrmax;
 
 
-            // Eccentricity contraint
+            // Eccentricity constraint
 
             var Emax = Math.Sqrt(
                 (27 * R * R * Z1 - Rr * Rr * Math.Pow(Z1 + 2, 3)) /
@@ -78,6 +88,8 @@ namespace CycloidGenerator.Solvers
 
         protected override void AfterCircle(IExportClient cl)
         {
+            // Rollers
+
             for (int i = 0; i < Z1 + 1; ++i)
             {
                 var angle = 360d / (Z1 + 1) * i * Deg2Rad;
@@ -88,8 +100,31 @@ namespace CycloidGenerator.Solvers
                 cl.Circle(new SolverPoint(x, y), Rr, 1, "rollers");
             }
 
+            // Centers
+
             cl.Circle(new SolverPoint(-E, 0), 2.5, 1, "rollers");
             cl.Circle(new SolverPoint(0, 0), CamDiameter / 2, 0, "base");
+
+
+            // Tolerances
+
+            var dgap = deo + dR + dcs + dcp;
+            var Rprofile = R - dgap;
+
+            var dsum = Math.Sqrt(deo * deo + dR * dR + dcs * dcs + dcp * dcp + djb * djb) + dgap;
+            var backlash = 2 * dsum / (E * Z1);  // radians
+
+            // Rollers after tolerance
+
+            for (int i = 0; i < Z1 + 1; ++i)
+            {
+                var angle = 360d / (Z1 + 1) * i * Deg2Rad;
+
+                var x = Rprofile * Math.Cos(angle) - E;
+                var y = Rprofile * Math.Sin(angle);
+
+                cl.Circle(new SolverPoint(x, y), Rr - dR, 3, "rollers_tolerance");
+            }
         }
 
         protected override SolverPoint GetCircularPoint(int step, double angle, IExportClient cl)
