@@ -25,7 +25,13 @@ namespace CycloidGenerator
         public double Value
         {
             get { return mValue; }
-            set { mValue = value; ValueChanged?.Invoke(mValue); }
+            set
+            {
+                if (mValue == value) return;
+
+                mValue = value;
+                ValueChanged?.Invoke(mValue);
+            }
         }
 
 

@@ -51,28 +51,28 @@ namespace CycloidGenerator
             set { mHint = value; Invalidate(); }
         }
 
-        public object DependencyObject 
+        public object DependencyObject
         {
             get { return mDepObject; }
             set { mDepObject = value; WriteToObject(); }
         }
-        
-        public string DependencyPropertyName 
+
+        public string DependencyPropertyName
         {
             get { return mDepPropertyName; }
             set { mDepPropertyName = value; CaptionLabel.Text = value; ReadFromObject(); }
         }
-        
-        public double Minimum 
+
+        public double Minimum
         {
             get { return trackBar1.Minimum / mDivider; }
             set { trackBar1.Minimum = (int)(value * mDivider); }
         }
-        
-        public double Maximum 
+
+        public double Maximum
         {
             get { return trackBar1.Maximum / mDivider; }
-            set { trackBar1.Maximum = (int)(value * mDivider); } 
+            set { trackBar1.Maximum = (int)(value * mDivider); }
         }
 
         public double Value
@@ -90,17 +90,19 @@ namespace CycloidGenerator
         public double SmallChange
         {
             get { return trackBar1.SmallChange / mDivider; }
-            set 
-            { 
-                trackBar1.SmallChange = (int)(value * mDivider); 
-                trackBar1.TickFrequency = trackBar1.LargeChange; 
+            set
+            {
+                trackBar1.SmallChange = (int)(value * mDivider);
+                trackBar1.TickFrequency = trackBar1.LargeChange;
             }
         }
+
 
         public DependencyTrackBar()
         {
             InitializeComponent();
         }
+        
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {

@@ -53,7 +53,7 @@ namespace CycloidGenerator
                 new Pen(Color.Gray, width),
                 new Pen(Color.LightGray, width),
                 new Pen(Color.FromArgb(230, 230, 230), width),
-                new Pen(Color.FromArgb(210, 210, 210), width), 
+                new Pen(Color.FromArgb(160, 160, 160), width), 
                 new Pen(Color.Black, width / 2f),
             };
         }

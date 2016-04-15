@@ -81,25 +81,25 @@ namespace CycloidGenerator
             const int NumLargeChangeDivisions = 10;
             const int NumSmallChangeDivisions = 200;
 
-            var dp = new DependencyTrackBar();
+            var dt = new DependencyTrackBar();
+            dt.Width = ParamsPanel.Width;
+            dt.Top = y;
+            dt.DependencyPropertyName = p.DependencyPropertyName;
+            dt.IsInteger = p.IsInteger;
+            dt.Maximum = p.MaxValue;
+            dt.Minimum = p.MinValue;
+            dt.Value = p.DefaultValue;
+            dt.Caption = p.Caption;
+            dt.Hint = p.Hint;
+            dt.LargeChange = p.LargeChange == 0 ? (p.MaxValue - p.MinValue) / NumLargeChangeDivisions : p.LargeChange;
+            dt.SmallChange = p.SmallChange == 0 ? (p.MaxValue - p.MinValue) / NumSmallChangeDivisions : p.SmallChange;
+            dt.TargetChanged += (s, e) => { gearVisualizer1.Invalidate(); p.Value = dt.Value; };
+            p.ValueChanged += (val) => { dt.Value = p.Value; };
+            dt.DependencyObject = mSolver;
 
-            dp.DependencyPropertyName = p.DependencyPropertyName;
-            dp.Width = ParamsPanel.Width;
-            dp.Top = y;
-            dp.IsInteger = p.IsInteger;
-            dp.Maximum = p.MaxValue; 
-            dp.Minimum = p.MinValue;
-            dp.Value = p.DefaultValue;
-            dp.Caption = p.Caption;
-            dp.Hint = p.Hint;
-            dp.LargeChange = p.LargeChange == 0 ? (p.MaxValue - p.MinValue) / NumLargeChangeDivisions : p.LargeChange;
-            dp.SmallChange = p.SmallChange == 0 ? (p.MaxValue - p.MinValue) / NumSmallChangeDivisions : p.SmallChange;
-            dp.TargetChanged += (s, e) => { gearVisualizer1.Invalidate(); p.Value = dp.Value; };
-            dp.DependencyObject = mSolver;
+            y += dt.Height;
 
-            y += dp.Height;
-
-            ParamsPanel.Controls.Add(dp);
+            ParamsPanel.Controls.Add(dt);
         }
 
         private void ExportDxfButton_Click(object sender, EventArgs e)
