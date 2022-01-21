@@ -13,6 +13,12 @@ This is a sample motion simulation of the exported DXF:
 
 ![Screenshot](/Screenshots/07.gif)
 
+## Using 
+
+There are some precompiled binaries in the 'Binaries' folder. Execute:
+
+    CycloidGenerator.exe
+
 
 ## Building
 
